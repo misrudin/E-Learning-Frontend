@@ -1,0 +1,217 @@
+.header {
+  width: 100%;
+  min-height: 70px;
+  padding: 0 20px;
+  box-shadow: -1px -1px 7px 1px rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #2376d5);
+  background-size: 400% 400%;
+  animation: gradient 30s ease-in-out infinite;
+  transition: 1s !important;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.logo {
+  display: none;
+  cursor: pointer;
+}
+.logo:hover {
+  color: #fff;
+}
+
+.sidebar {
+  display: none;
+  padding: 10px 15px;
+  height: 100vh;
+  width: 70px;
+  box-shadow: -1px 9px 7px 1px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 80px;
+  z-index: 99;
+  box-sizing: border-box;
+  background-image: linear-gradient(
+    to bottom,
+    #055ea5 0%,
+    #57cad5 100%,
+    #055ea5 100%
+  ) !important;
+  transition: 0.2s;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-mapel {
+  background-color: #fff;
+  width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.judul {
+  display: flex;
+}
+
+.user {
+  border: 2px solid #eee;
+  border-radius: 10px;
+  padding: 5px 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  display: flex;
+}
+.user:hover {
+  background-color: #2376d5;
+  border: 2px solid #2376d5;
+  -webkit-box-shadow: 0 4px 4px #777 !important;
+  -moz-box-shadow: 0 4px 4px #777 !important;
+  box-shadow: 0 4px 4px #777 !important;
+}
+
+.menu ul li {
+  position: relative;
+  text-align: center;
+  transition: 1s;
+}
+
+.navbar-toggler {
+  color: #fff !important;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .menu ul li.active {
+    border: 1px solid #fff;
+  }
+
+  .menu ul li {
+    margin-top: 5px;
+    transition: 0.2s;
+    padding: 0 10px;
+  }
+
+  .menu ul {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .menu ul li.active {
+    border: 1px solid #fff;
+  }
+  .menu ul li {
+    margin-top: 5px;
+    transition: 0.2s;
+  }
+
+  .menu ul {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .menu ul li:hover::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    border: 1px dashed rgb(255, 255, 255);
+    transition: 0.5s;
+    left: 30%;
+    bottom: 4px;
+  }
+  .menu ul li.active::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    width: 50%;
+    border: 1px solid rgb(255, 255, 255);
+    transition: 0.5s;
+    left: 30%;
+  }
+
+  .menu ul li.active:hover::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    width: 100%;
+    border: 1px solid rgb(255, 255, 255);
+    transition: 0.5s;
+    left: 0%;
+  }
+
+  .menu ul li.active {
+    border: none;
+  }
+  .menu ul li {
+    margin-top: 0px;
+    transition: 0.2s;
+  }
+
+  .menu ul {
+    display: flex;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .menu ul li:hover::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    border: 1px dashed rgb(255, 255, 255);
+    transition: 0.5s;
+    left: 30%;
+    bottom: 4px;
+  }
+  .menu ul li.active::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    width: 50%;
+    border: 1px solid rgb(255, 255, 255);
+    transition: 0.5s;
+    left: 30%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .menu ul li:hover::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    border: 1px dashed rgb(255, 255, 255);
+    transition: 0.5s;
+    left: 30%;
+    bottom: 4px;
+  }
+  .menu ul li.active::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    width: 50%;
+    border: 1px solid rgb(255, 255, 255);
+    transition: 0.5s;
+    left: 30%;
+  }
+}

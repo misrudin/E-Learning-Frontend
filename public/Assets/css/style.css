@@ -1,0 +1,204 @@
+.buton {
+  background-image: linear-gradient(
+    to right,
+    #055ea5 0%,
+    #57cad5 50%,
+    #055ea5 100%
+  ) !important;
+  border: none !important;
+  -webkit-box-shadow: -1px -1px 4px 1px rgba(0, 0, 0, 0.1) !important;
+  -moz-box-shadow: -1px -1px 4px 1px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: -1px -1px 4px 1px rgba(0, 0, 0, 0.1) !important;
+  transition: 0.2s ease-in-out !important;
+}
+
+.buton:hover {
+  -webkit-box-shadow: 0 4px 4px #777 !important;
+  -moz-box-shadow: 0 4px 4px #777 !important;
+  box-shadow: 0 4px 4px #777 !important;
+  background-image: linear-gradient(
+    to right,
+    #055ea5 0%,
+    #57cad5 45%,
+    #055ea5 100%
+  ) !important;
+  background-size: 400% 100%;
+  animation: gradient-button 2s ease-in-out;
+}
+.buton:active {
+  background-image: linear-gradient(
+    to right,
+    #055ea5 0%,
+    #57cad5 55%,
+    #055ea5 100%
+  ) !important;
+}
+
+.buton-dgr {
+  background-image: linear-gradient(
+    to right,
+    #bb096b 0%,
+    #d557a5 50%,
+    #bb096b 100%
+  ) !important;
+  border: none !important;
+  -webkit-box-shadow: -1px -1px 4px 1px rgba(0, 0, 0, 0.1) !important;
+  -moz-box-shadow: -1px -1px 4px 1px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: -1px -1px 4px 1px rgba(0, 0, 0, 0.1) !important;
+  transition: 0.2s ease-in-out !important;
+}
+
+.buton-dgr:hover {
+  -webkit-box-shadow: 0 4px 4px #777 !important;
+  -moz-box-shadow: 0 4px 4px #777 !important;
+  box-shadow: 0 4px 4px #777 !important;
+  background-image: linear-gradient(
+    to right,
+    #bb096b 0%,
+    #d557a5 45%,
+    #bb096b 100%
+  ) !important;
+  background-size: 400% 100%;
+  animation: gradient-button 2s ease-in-out;
+}
+.buton-dgr:active {
+  background-image: linear-gradient(
+    to right,
+    #bb096b 0%,
+    #d557a5 55%,
+    #bb096b 100%
+  ) !important;
+}
+
+.buton-sec {
+  background-image: linear-gradient(
+    to right,
+    #413e3f 0%,
+    #857b81 50%,
+    #413e3f 100%
+  ) !important;
+  border: none !important;
+  -webkit-box-shadow: -1px -1px 4px 1px rgba(0, 0, 0, 0.1) !important;
+  -moz-box-shadow: -1px -1px 4px 1px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: -1px -1px 4px 1px rgba(0, 0, 0, 0.1) !important;
+  transition: 0.2s ease-in-out !important;
+}
+
+.buton-sec:hover {
+  -webkit-box-shadow: 0 4px 4px #777 !important;
+  -moz-box-shadow: 0 4px 4px #777 !important;
+  box-shadow: 0 4px 4px #777 !important;
+  background-image: linear-gradient(
+    to right,
+    #413e3f 0%,
+    #857b81 45%,
+    #413e3f 100%
+  ) !important;
+  background-size: 400% 100%;
+  animation: gradient-button 2s ease-in-out;
+}
+.buton-sec:active {
+  background-image: linear-gradient(
+    to right,
+    #413e3f 0%,
+    #857b81 55%,
+    #413e3f 100%
+  ) !important;
+}
+
+.bg-gradient {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(-45deg, #ee7752, #943ce7, #23a6d5, #238ed5);
+  background-size: 400% 400%;
+  animation: gradient 30s ease-in-out infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient-button {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* h1.text {
+  background-image: linear-gradient(-25deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  animation: textgra 5s ease-in-out infinite;
+} */
+
+.wrapper {
+  background-color: #f7f9fc;
+  min-height: calc(100vh - 70px);
+  margin-left: 0px;
+  margin-top: 70px;
+  padding: 20px;
+  position: relative;
+  transition: 0.2s;
+}
+
+.link {
+  text-decoration: none !important;
+  color: #fff !important;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: none !important;
+  color: #fff;
+}
+
+.btn-trash {
+  color: #ff002b;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.btn-edit {
+  color: #ffae00;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.btn-trash:hover {
+  color: #5a000f;
+}
+.btn-edit:hover {
+  color: #ff5100;
+}
+
+input[type="text"] {
+  text-transform: uppercase;
+}
+input[type="password"] {
+  text-transform: uppercase;
+}
+
+td {
+  text-transform: uppercase;
+}
+
+td.email {
+  text-transform: lowercase;
+}
