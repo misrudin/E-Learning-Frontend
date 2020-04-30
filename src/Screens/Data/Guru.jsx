@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {
-  getGuru,
+  getPageGuru,
   addGuru,
   editGuru,
   deleteGuru,
@@ -25,11 +25,59 @@ const DataGuru = (props) => {
   const [modal, setModal] = useState("");
   const [msg, setMsg] = useState(errMsg);
   const [show, setShow] = useState(false);
+  const [page, setPage] = useState(1);
+  const [key, setKey] = useState("");
 
   const clear = () => {
     setNip("");
     setName("");
     setEmail("");
+    setMsg("");
+  };
+
+  const prevPage = async () => {
+    const newPage = page - 1;
+    setPage(newPage);
+
+    setLoading2(true);
+    await dispatch(getPageGuru(newPage, key)).then(() => {
+      setLoading2(false);
+    });
+  };
+  const nextPage = async () => {
+    const newPage = page + 1;
+    setPage(newPage);
+
+    setLoading2(true);
+    await dispatch(getPageGuru(newPage, key)).then(() => {
+      setLoading2(false);
+    });
+  };
+  const getPage = async (newPage) => {
+    setPage(newPage);
+
+    setLoading2(true);
+    await dispatch(getPageGuru(newPage, key)).then(() => {
+      setLoading2(false);
+    });
+  };
+
+  const getKey = async (e) => {
+    if (e) {
+      if (e.key === "Enter") {
+        setPage(1);
+        setLoading2(true);
+        await dispatch(getPageGuru(1, key)).then(() => {
+          setLoading2(false);
+        });
+      }
+    } else {
+      setPage(1);
+      setLoading2(true);
+      await dispatch(getPageGuru(1, "")).then(() => {
+        setLoading2(false);
+      });
+    }
   };
 
   const handleClose = () => {
@@ -60,9 +108,9 @@ const DataGuru = (props) => {
   }, []);
 
   const getData = async () => {
-    setLoading1(true);
-    await dispatch(getGuru()).then(() => {
-      setLoading1(false);
+    setLoading2(true);
+    await dispatch(getPageGuru(page, key)).then(() => {
+      setLoading2(false);
     });
   };
 
@@ -88,6 +136,7 @@ const DataGuru = (props) => {
         setLoading2(false);
         const result = res.value.data.result;
         if (result) {
+          getData();
           swal("Berhasil!", "Data Guru Ditambahkan", "success");
           handleClose();
         } else {
@@ -109,6 +158,7 @@ const DataGuru = (props) => {
       if (willDelete) {
         setLoading2(true);
         await dispatch(deleteGuru(id)).then(() => {
+          getData();
           setLoading2(false);
           swal("Berhasil!", "Data Guru Dihapus", "success");
         });
@@ -144,6 +194,7 @@ const DataGuru = (props) => {
             setLoading2(false);
             const result = res.value.data.result;
             if (result) {
+              getData();
               swal("Berhasil!", "Data Guru Diedit", "success");
               handleClose();
             } else {
@@ -168,8 +219,14 @@ const DataGuru = (props) => {
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    const getData2 = async () => {
+      setLoading1(true);
+      await dispatch(getPageGuru(1, "")).then(() => {
+        setLoading1(false);
+      });
+    };
+    getData2();
+  }, [dispatch]);
 
   const logout = () => {
     localStorage.removeItem("Token");
@@ -188,15 +245,40 @@ const DataGuru = (props) => {
           <Loading />
         ) : (
           <>
-            <button
-              className="btn btn-primary mb-3 px-4 buton"
-              onClick={() => {
-                setModal("tambah");
-                setShow(true);
-              }}
-            >
-              Tambah Data Guru
-            </button>
+            <div className="head">
+              <button
+                className="btn btn-primary px-4 buton"
+                onClick={() => {
+                  setModal("tambah");
+                  setShow(true);
+                }}
+              >
+                Tambah Data Guru
+              </button>
+              <div className="cari">
+                <input
+                  type="text"
+                  className="form-control shadow-sm cariinput border-0"
+                  name="search"
+                  required
+                  value={key}
+                  placeholder="Enter Untuk Cari ..."
+                  onChange={(e) => setKey(e.target.value)}
+                  onKeyPress={getKey}
+                />
+                {key.length > 0 ? (
+                  <p
+                    className="bersih"
+                    onClick={() => {
+                      setKey("");
+                      getKey();
+                    }}
+                  >
+                    x
+                  </p>
+                ) : null}
+              </div>
+            </div>
 
             <div className="card shadow">
               <div className="card-body p-0">
@@ -212,7 +294,7 @@ const DataGuru = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {dataGuru.map((data, i) => {
+                      {dataGuru[2].map((data, i) => {
                         return (
                           <tr key={i}>
                             <td>{i + 1}</td>
@@ -247,6 +329,45 @@ const DataGuru = (props) => {
                   </table>
                 </div>
               </div>
+            </div>
+            <div className="col-md-12 my-3">
+              {dataGuru[0] === 1 ? null : (
+                <nav>
+                  <ul className="pagination  justify-content-center">
+                    {page <= 1 ? null : (
+                      <li className="page-item" onClick={prevPage}>
+                        <p className="page-link">Previous</p>
+                      </li>
+                    )}
+
+                    {dataGuru[3].map((page, i) => {
+                      return (
+                        <li
+                          key={i}
+                          className={
+                            page.page === dataGuru[1]
+                              ? "page-item active"
+                              : "page-item"
+                          }
+                          onClick={
+                            page.page === dataGuru[1]
+                              ? null
+                              : () => getPage(page.page)
+                          }
+                        >
+                          <p className="page-link">{page.page}</p>
+                        </li>
+                      );
+                    })}
+
+                    {parseInt(page) < parseInt(dataGuru[0]) ? (
+                      <li className="page-item" onClick={nextPage}>
+                        <p className="page-link">Next</p>
+                      </li>
+                    ) : null}
+                  </ul>
+                </nav>
+              )}
             </div>
           </>
         )}

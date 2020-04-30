@@ -27,8 +27,9 @@ const Splash = (props) => {
 
   return (
     <div className="container-fluid splash">
-      <div className="anim">
-        <div className="anim-item"></div>
+      <div className="lds-ripple">
+        <div></div>
+        <div></div>
       </div>
     </div>
   );

@@ -2,73 +2,73 @@ const initialValue = {
   isPending: false,
   isRejected: false,
   isFulfilled: false,
-  dataSiswa: [],
+  dataMapel: [],
 };
 
-const siswaReducer = (state = initialValue, action) => {
+const mapelReducer = (state = initialValue, action) => {
   switch (action.type) {
-    case "GET_SISWA_PENDING":
+    case "GET_MAPEL_PENDING":
       return {
         ...state,
         isPending: true,
         isRejected: false,
         isFulfilled: false,
       };
-    case "GET_SISWA_REJECTED":
+    case "GET_MAPEL_REJECTED":
       return {
         ...state,
         isPending: false,
         isRejected: true,
         errMsg: action.payload,
       };
-    case "GET_SISWA_FULFILLED":
+    case "GET_MAPEL_FULFILLED":
       return {
         ...state,
         isPending: false,
         isFulfilled: true,
-        dataSiswa: action.payload.data.result,
+        dataMapel: action.payload.data.result,
       };
-    case "ADD_SISWA_PENDING":
+    case "ADD_MAPEL_PENDING":
       return {
         ...state,
         isPending: true,
         isRejected: false,
         isFulfilled: false,
       };
-    case "ADD_SISWA_REJECTED":
+    case "ADD_MAPEL_REJECTED":
       return {
         ...state,
         isPending: false,
         isRejected: true,
         errMsg: action.payload,
       };
-    case "ADD_SISWA_FULFILLED":
+    case "ADD_MAPEL_FULFILLED":
       // if (action.payload.data.result) {
-      //   state.dataSiswa.push(action.payload.data.result);
+      //   state.dataMapel.push(action.payload.data.result);
       // }
       return {
         ...state,
         isPending: false,
         isFulfilled: true,
-        dataSiswa: state.dataSiswa,
+        dataMapel: state.dataMapel,
       };
-    case "EDIT_SISWA_PENDING":
+    case "EDIT_MAPEL_PENDING":
       return {
         ...state,
         isPending: true,
         isRejected: false,
         isFulfilled: false,
       };
-    case "EDIT_SISWA_REJECTED":
+    case "EDIT_MAPEL_REJECTED":
       return {
         ...state,
         isPending: false,
         isRejected: true,
         errMsg: action.payload,
       };
-    case "EDIT_SISWA_FULFILLED":
+    case "EDIT_MAPEL_FULFILLED":
       // if (action.payload.data.result) {
-      //   const dataAfterEdit = state.dataSiswa.map((data) => {
+      //   const dataAfterEdit = state.dataMapel.map((data) => {
       //     if (data.id.toString() === action.payload.data.result.id) {
       //       return action.payload.data.result;
       //     }
@@ -78,7 +78,7 @@ const siswaReducer = (state = initialValue, action) => {
       //     ...state,
       //     isPending: false,
       //     isFulfilled: true,
-      //     dataSiswa: dataAfterEdit,
+      //     dataMapel: dataAfterEdit,
       //   };
       // } else {
       // }
@@ -86,53 +86,53 @@ const siswaReducer = (state = initialValue, action) => {
         ...state,
         isPending: false,
         isFulfilled: true,
-        dataSiswa: state.dataSiswa,
+        dataMapel: state.dataMapel,
       };
-    case "DELETE_SISWA_PENDING":
+    case "DELETE_MAPEL_PENDING":
       return {
         ...state,
         isPending: true,
         isRejected: false,
         isFulfilled: false,
       };
-    case "DELETE_SISWA_REJECTED":
+    case "DELETE_MAPEL_REJECTED":
       return {
         ...state,
         isPending: false,
         isRejected: true,
         errMsg: action.payload,
       };
-    case "DELETE_SISWA_FULFILLED":
-      // const dataAfterDelete = state.dataSiswa.filter(
+    case "DELETE_MAPEL_FULFILLED":
+      // const dataAfterDelete = state.dataMapel.filter(
       //   (data) => data.id.toString() !== action.payload.data.result
       // );
       return {
         ...state,
         isPending: false,
         isFulfilled: true,
-        dataSiswa: state.dataSiswa,
+        dataMapel: state.dataMapel,
       };
 
-    case "PAGE_SISWA_PENDING":
+    case "PAGE_MAPEL_PENDING":
       return {
         ...state,
         isPending: true,
         isRejected: false,
         isFulfilled: false,
       };
-    case "PAGE_SISWA_REJECTED":
+    case "PAGE_MAPEL_REJECTED":
       return {
         ...state,
         isPending: false,
         isRejected: true,
         errMsg: action.payload,
       };
-    case "PAGE_SISWA_FULFILLED":
+    case "PAGE_MAPEL_FULFILLED":
       return {
         ...state,
         isPending: false,
         isFulfilled: true,
-        dataSiswa: action.payload.data.result,
+        dataMapel: action.payload.data.result,
       };
 
     default:
@@ -142,4 +142,4 @@ const siswaReducer = (state = initialValue, action) => {
   }
 };
 
-export default siswaReducer;
+export default mapelReducer;

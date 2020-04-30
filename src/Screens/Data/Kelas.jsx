@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../Components/Header";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {
-  getKelas,
+  getPageKelas,
   addKelas,
   editKelas,
   deleteKelas,
 } from "../../redux/actions/kelas";
+import Header from "../../Components/Header";
 import Loading from "../Loading";
 import swal from "sweetalert";
 
@@ -24,9 +24,57 @@ const DataKelas = (props) => {
   const [modal, setModal] = useState("");
   const [msg, setMsg] = useState(errMsg);
   const [show, setShow] = useState(false);
+  const [page, setPage] = useState(1);
+  const [key, setKey] = useState("");
 
   const clear = () => {
     setKelas("");
+    setMsg("");
+  };
+
+  const prevPage = async () => {
+    const newPage = page - 1;
+    setPage(newPage);
+
+    setLoading2(true);
+    await dispatch(getPageKelas(newPage, key)).then(() => {
+      setLoading2(false);
+    });
+  };
+  const nextPage = async () => {
+    const newPage = page + 1;
+    setPage(newPage);
+
+    setLoading2(true);
+    await dispatch(getPageKelas(newPage, key)).then(() => {
+      setLoading2(false);
+    });
+  };
+  const getPage = async (newPage) => {
+    setPage(newPage);
+
+    setLoading2(true);
+    await dispatch(getPageKelas(newPage, key)).then(() => {
+      setLoading2(false);
+    });
+  };
+
+  const getKey = async (e) => {
+    if (e) {
+      if (e.key === "Enter") {
+        setPage(1);
+        setLoading2(true);
+        await dispatch(getPageKelas(1, key)).then(() => {
+          setLoading2(false);
+        });
+      }
+    } else {
+      setPage(1);
+      setLoading2(true);
+      await dispatch(getPageKelas(1, "")).then(() => {
+        setLoading2(false);
+      });
+    }
   };
 
   const handleClose = () => {
@@ -34,32 +82,14 @@ const DataKelas = (props) => {
     setShow(false);
   };
 
-  const validName = (data) => {
-    // eslint-disable-next-line
-    let Regex = /^[a-zA-Z][a-zA-Z ]*$/;
-    return Regex.test(data);
-  };
-
-  const validEmail = (data) => {
-    // eslint-disable-next-line
-    let Regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-    return Regex.test(data);
-  };
-
-  const validNip = (data) => {
-    // eslint-disable-next-line
-    let Regex = /^[0-9\d]{4,}$/;
-    return Regex.test(data);
-  };
-
   useEffect(() => {
     document.getElementById("title").innerText = "Data Guru";
   }, []);
 
   const getData = async () => {
-    setLoading1(true);
-    await dispatch(getKelas()).then(() => {
-      setLoading1(false);
+    setLoading2(true);
+    await dispatch(getPageKelas(page, key)).then(() => {
+      setLoading2(false);
     });
   };
 
@@ -76,6 +106,7 @@ const DataKelas = (props) => {
         setLoading2(false);
         const result = res.value.data.result;
         if (result) {
+          getData();
           swal("Berhasil!", "Data Kelas Ditambahkan", "success");
           handleClose();
         } else {
@@ -97,6 +128,7 @@ const DataKelas = (props) => {
       if (willDelete) {
         setLoading2(true);
         await dispatch(deleteKelas(id)).then(() => {
+          getData();
           setLoading2(false);
           swal("Berhasil!", "Data Kelas Dihapus", "success");
         });
@@ -123,6 +155,7 @@ const DataKelas = (props) => {
             setLoading2(false);
             const result = res.value.data.result;
             if (result) {
+              getData();
               swal("Berhasil!", "Data Kelas Diedit", "success");
               handleClose();
             } else {
@@ -140,13 +173,19 @@ const DataKelas = (props) => {
   const handleinputEdit = (data) => {
     setShow(true);
     setId(data.id);
-    alert(data.id);
     setKelas(data.nama_kelas);
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    const getData2 = async () => {
+      setLoading1(true);
+      await dispatch(getPageKelas(1, "")).then(() => {
+        setLoading1(false);
+      });
+    };
+
+    getData2();
+  }, [dispatch]);
 
   const logout = () => {
     localStorage.removeItem("Token");
@@ -165,15 +204,40 @@ const DataKelas = (props) => {
           <Loading />
         ) : (
           <>
-            <button
-              className="btn btn-primary mb-3 px-4 buton"
-              onClick={() => {
-                setModal("tambah");
-                setShow(true);
-              }}
-            >
-              Tambah Data Kelas
-            </button>
+            <div className="head">
+              <button
+                className="btn btn-primary px-4 buton"
+                onClick={() => {
+                  setModal("tambah");
+                  setShow(true);
+                }}
+              >
+                Tambah Data Kelas
+              </button>
+              <div className="cari">
+                <input
+                  type="text"
+                  className="form-control shadow-sm cariinput border-0"
+                  name="search"
+                  required
+                  value={key}
+                  placeholder="Enter Untuk Cari ..."
+                  onChange={(e) => setKey(e.target.value)}
+                  onKeyPress={getKey}
+                />
+                {key.length > 0 ? (
+                  <p
+                    className="bersih"
+                    onClick={() => {
+                      setKey("");
+                      getKey();
+                    }}
+                  >
+                    x
+                  </p>
+                ) : null}
+              </div>
+            </div>
 
             <div className="card shadow">
               <div className="card-body p-0">
@@ -187,7 +251,7 @@ const DataKelas = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {dataKelas.map((data, i) => {
+                      {dataKelas[2].map((data, i) => {
                         return (
                           <tr key={i}>
                             <td>{i + 1}</td>
@@ -221,6 +285,46 @@ const DataKelas = (props) => {
                 </div>
               </div>
             </div>
+
+            <div className="col-md-12 my-3">
+              {dataKelas[0] === 1 ? null : (
+                <nav>
+                  <ul className="pagination  justify-content-center">
+                    {page <= 1 ? null : (
+                      <li className="page-item" onClick={prevPage}>
+                        <p className="page-link">Previous</p>
+                      </li>
+                    )}
+
+                    {dataKelas[3].map((page, i) => {
+                      return (
+                        <li
+                          key={i}
+                          className={
+                            page.page === dataKelas[1]
+                              ? "page-item active"
+                              : "page-item"
+                          }
+                          onClick={
+                            page.page === dataKelas[1]
+                              ? null
+                              : () => getPage(page.page)
+                          }
+                        >
+                          <p className="page-link">{page.page}</p>
+                        </li>
+                      );
+                    })}
+
+                    {parseInt(page) < parseInt(dataKelas[0]) ? (
+                      <li className="page-item" onClick={nextPage}>
+                        <p className="page-link">Next</p>
+                      </li>
+                    ) : null}
+                  </ul>
+                </nav>
+              )}
+            </div>
           </>
         )}
       </div>
@@ -249,7 +353,7 @@ const DataKelas = (props) => {
                 <input
                   type="text"
                   className="form-control shadow-sm border-0"
-                  name="nip"
+                  name="kelas"
                   required
                   value={kelas}
                   onChange={(e) => setKelas(e.target.value)}

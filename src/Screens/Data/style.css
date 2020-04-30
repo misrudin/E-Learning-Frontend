@@ -1,3 +1,88 @@
 .modal-content {
   background-color: #f7f9fc !important;
 }
+
+.item-mapel {
+  width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 1px;
+}
+
+.judul {
+  display: flex;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgb(212, 212, 212);
+}
+
+.soal {
+  background-color: rgb(109, 68, 7);
+}
+
+.materi {
+  background: rgb(95, 50, 7);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+div.items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  grid-gap: 20px;
+  width: 100%;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  div.items {
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
+    margin-left: 0px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  div.items {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    /* margin-left: 0px; */
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  div.items {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    /* margin-left: 0px; */
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  div.items {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    /* margin-left: 80px; */
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  div.items {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    /* margin-left: 80px; */
+  }
+}
+
+.oleh {
+  font-size: 13px;
+}

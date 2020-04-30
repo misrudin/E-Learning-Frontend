@@ -19,7 +19,7 @@ const LoginGuru = (props) => {
   };
   const validNip = (data) => {
     // eslint-disable-next-line
-    let Regex = /^[0-9\d]{5,}$/;
+    let Regex = /^[0-9\d]{4,}$/;
     return Regex.test(data);
   };
 
@@ -43,7 +43,7 @@ const LoginGuru = (props) => {
     setLoading(true);
     const data = { nip, password };
     if (!validNip(nip)) {
-      setMsg("Format NIP Harus Angka Dan Minimal 5 Karakter!");
+      setMsg("Format NIP Harus Angka Dan Minimal 4 Karakter!");
     } else if (!validPassword(password)) {
       setMsg("Input Password Minimal 3 Karakter!");
     } else {

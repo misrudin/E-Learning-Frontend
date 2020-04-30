@@ -3,6 +3,7 @@ const initialValue = {
   isRejected: false,
   isFulfilled: false,
   dataGuru: [],
+  pageGuru: [],
 };
 
 const guruReducer = (state = initialValue, action) => {
@@ -43,9 +44,9 @@ const guruReducer = (state = initialValue, action) => {
         errMsg: action.payload,
       };
     case "ADD_GURU_FULFILLED":
-      if (action.payload.data.result) {
-        state.dataGuru.push(action.payload.data.result);
-      }
+      // if (action.payload.data.result) {
+      //   state.pageGuru[2].push(action.payload.data.result);
+      // }
       return {
         ...state,
         isPending: false,
@@ -67,28 +68,27 @@ const guruReducer = (state = initialValue, action) => {
         errMsg: action.payload,
       };
     case "EDIT_GURU_FULFILLED":
-      if (action.payload.data.result) {
-        const dataAfterEdit = state.dataGuru.map((data) => {
-          if (data.id.toString() === action.payload.data.result.id) {
-            return action.payload.data.result;
-          }
-          return data;
-        });
-        return {
-          ...state,
-          isPending: false,
-          isFulfilled: true,
-          dataGuru: dataAfterEdit,
-        };
-      } else {
-        return {
-          ...state,
-          isPending: false,
-          isFulfilled: true,
-          dataGuru: state.dataGuru,
-          errMsg: action.payload.data,
-        };
-      }
+      // if (action.payload.data.result) {
+      //   const dataAfterEdit = state.dataGuru[2].map((data) => {
+      //     if (data.id.toString() === action.payload.data.result.id) {
+      //       return action.payload.data.result;
+      //     }
+      //     return data;
+      //   });
+      //   return {
+      //     ...state,
+      //     isPending: false,
+      //     isFulfilled: true,
+      //     dataGuru: dataAfterEdit,
+      //   };
+      // } else {
+      // }
+      return {
+        ...state,
+        isPending: false,
+        isFulfilled: true,
+        dataGuru: state.dataGuru,
+      };
     case "DELETE_GURU_PENDING":
       return {
         ...state,
@@ -104,14 +104,36 @@ const guruReducer = (state = initialValue, action) => {
         errMsg: action.payload,
       };
     case "DELETE_GURU_FULFILLED":
-      const dataAfterDelete = state.dataGuru.filter(
-        (data) => data.id.toString() !== action.payload.data.result
-      );
+      // const dataAfterDelete = state.dataGuru.filter(
+      //   (data) => data.id.toString() !== action.payload.data.result
+      // );
       return {
         ...state,
         isPending: false,
         isFulfilled: true,
-        dataGuru: dataAfterDelete,
+        dataGuru: state.dataGuru,
+      };
+
+    case "PAGE_GURU_PENDING":
+      return {
+        ...state,
+        isPending: true,
+        isRejected: false,
+        isFulfilled: false,
+      };
+    case "PAGE_GURU_REJECTED":
+      return {
+        ...state,
+        isPending: false,
+        isRejected: true,
+        errMsg: action.payload,
+      };
+    case "PAGE_GURU_FULFILLED":
+      return {
+        ...state,
+        isPending: false,
+        isFulfilled: true,
+        dataGuru: action.payload.data.result,
       };
 
     default:

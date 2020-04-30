@@ -156,7 +156,7 @@
   margin-top: 70px;
   padding: 20px;
   position: relative;
-  transition: 0.2s;
+  transition: 1s;
 }
 
 .link {
@@ -194,6 +194,9 @@ input[type="text"] {
 input[type="password"] {
   text-transform: uppercase;
 }
+select {
+  text-transform: uppercase;
+}
 
 td {
   text-transform: uppercase;
@@ -201,4 +204,41 @@ td {
 
 td.email {
   text-transform: lowercase;
+}
+
+/* header pencarian data */
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px;
+}
+.cari {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* background-color: red; */
+}
+
+.bersih {
+  position: absolute;
+  right: 10px;
+  color: rgb(155, 145, 145);
+  font-size: 19px;
+  top: 3px;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bersih:hover {
+  color: salmon;
+}
+
+.cariinput {
+  padding-right: 25px !important;
+}
+
+.page-link {
+  cursor: pointer !important;
 }

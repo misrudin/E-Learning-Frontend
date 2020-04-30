@@ -8,9 +8,9 @@ const Auth = (props) => {
   }, []);
 
   return !localStorage.getItem("Token") ? (
-    <div className="container auth">
-      <div className="col">
-        <div className="row justify-content-center">
+    <div className="auth">
+      <div className="items">
+        <div className="item">
           <div
             className="login-auth"
             onClick={() => props.history.push("/admin")}
@@ -19,7 +19,7 @@ const Auth = (props) => {
             <h1>Admin</h1>
           </div>
         </div>
-        <div className="row justify-content-center">
+        <div className="item">
           <div
             className="login-auth"
             onClick={() => props.history.push("/guru")}
@@ -28,7 +28,7 @@ const Auth = (props) => {
             <h1>Guru</h1>
           </div>
         </div>
-        <div className="row justify-content-center">
+        <div className="item">
           <div
             className="login-auth"
             onClick={() => props.history.push("/siswa")}

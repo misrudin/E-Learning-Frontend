@@ -25,3 +25,10 @@ export const loginSiswa = (data) => {
     payload: axios.post(process.env.REACT_APP_URL + "auth/siswa", data),
   };
 };
+
+export const getDetailAdmin = (id) => {
+  return {
+    type: "GET_ADMIN",
+    payload: axios.get(process.env.REACT_APP_URL + `admin/detail?id=${id}`),
+  };
+};

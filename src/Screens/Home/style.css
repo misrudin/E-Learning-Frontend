@@ -1,0 +1,37 @@
+.alert-home {
+  text-transform: uppercase;
+  transition: 1s;
+}
+
+.alert-home span {
+  font-weight: bold;
+}
+
+.items-akses {
+  transition: 1s;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.item-akses {
+  background-color: #fff;
+  padding: 10px 20px;
+  margin: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.item-akses:hover,
+.judul-akses:hover {
+  background-color: rgb(130, 176, 228);
+  color: #fff !important;
+}
+
+.active-akses {
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}

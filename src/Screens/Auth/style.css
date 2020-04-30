@@ -54,8 +54,8 @@ input[type="password"] {
   justify-content: center;
   align-items: center;
   color: #fff;
-  min-width: 400px;
-  margin: 4px;
+  /* min-width: 400px; */
+  /* margin: 4px; */
 }
 
 .login-auth:hover {
@@ -77,7 +77,50 @@ input[type="password"] {
 .auth {
   background-color: #0c3779;
   display: flex;
-  align-items: center !important;
+  align-items: center;
   justify-content: center;
-  min-height: 100vh !important;
+  width: 100%;
+  height: 100vh;
+  padding: 0px 20px;
+}
+
+div.items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(1fr, 1fr));
+  gap: 20px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  div.items {
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  div.items {
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  div.items {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  div.items {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  div.items {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+  }
 }

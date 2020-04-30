@@ -24,3 +24,19 @@ export const deleteGuru = (id) => {
     payload: axios.delete(process.env.REACT_APP_URL + `guru?id=${id}`),
   };
 };
+
+export const getPageGuru = (page, key) => {
+  return {
+    type: "PAGE_GURU",
+    payload: axios.get(
+      process.env.REACT_APP_URL + `guru?page=${page}&key=${key}`
+    ),
+  };
+};
+
+export const getDetailGuru = (id) => {
+  return {
+    type: "GET_GURU",
+    payload: axios.get(process.env.REACT_APP_URL + `guru/detail?id=${id}`),
+  };
+};

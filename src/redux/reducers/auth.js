@@ -4,6 +4,7 @@ const initialValue = {
   isFulfilled: false,
   token: null,
   loading: true,
+  dataAdmin: [],
 };
 
 const authReducer = (state = initialValue, action) => {
@@ -78,6 +79,28 @@ const authReducer = (state = initialValue, action) => {
         isPending: false,
         isFulfilled: true,
         token: action.payload.data.result.token,
+      };
+
+    case "GET_ADMIN_PENDING":
+      return {
+        ...state,
+        isPending: true,
+        isRejected: false,
+        isFulfilled: false,
+      };
+    case "GET_ADMIN_REJECTED":
+      return {
+        ...state,
+        isPending: false,
+        isRejected: true,
+        errMsg: action.payload,
+      };
+    case "GET_ADMIN_FULFILLED":
+      return {
+        ...state,
+        isPending: false,
+        isFulfilled: true,
+        dataAdmin: action.payload.data.result,
       };
 
     default:

@@ -24,3 +24,12 @@ export const deleteKelas = (id) => {
     payload: axios.delete(process.env.REACT_APP_URL + `kelas?id=${id}`),
   };
 };
+
+export const getPageKelas = (page, key) => {
+  return {
+    type: "PAGE_KELAS",
+    payload: axios.get(
+      process.env.REACT_APP_URL + `kelas?page=${page}&key=${key}`
+    ),
+  };
+};

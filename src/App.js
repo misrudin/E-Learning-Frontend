@@ -10,12 +10,15 @@ import LoginGuru from "./Screens/Auth/LoginGuru";
 import LoginSiswa from "./Screens/Auth/loginSiswa";
 import Guru from "./Screens/Data/Guru";
 import Siswa from "./Screens/Data/Siswa";
-import Soal from "./Screens/Data/Soal";
 import Mapel from "./Screens/Data/Mapel";
 import ListMapel from "./Screens/Data/ListMapel";
 import Kelas from "./Screens/Data/Kelas";
 import Home from "./Screens/Home/Home";
 import DetailMapel from "./Screens/Data/DetailMapel";
+import Akses from "./Screens/Data/AksesGuru";
+import TambahMapel from "./Screens/Form/TambahMapel";
+import TambahSoal from "./Screens/Form/TambahSoal";
+import Profile from "./Screens/Form/Profile";
 
 const App = () => {
   return (
@@ -33,10 +36,13 @@ const App = () => {
         <Route path="/data-siswa" component={Siswa} />
         <Route path="/data-kelas" component={Kelas} />
         <Route path="/data-mapel" component={Mapel} />
-        <Route path="/data-soal" component={Soal} />
 
         <Route path="/mapel" exact component={ListMapel} />
-        <Route path="/mapel/detail" component={DetailMapel} />
+        <Route path="/mapel/detail/:id" component={DetailMapel} />
+        <Route path="/mapel/tambah-mapel" component={TambahMapel} />
+        <Route path="/mapel/tambah-soal" component={TambahSoal} />
+        <Route path="/akses/:id" component={Akses} />
+        <Route path="/profile" component={Profile} />
       </Router>
     </Provider>
   );

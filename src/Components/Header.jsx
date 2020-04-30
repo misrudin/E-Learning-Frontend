@@ -69,13 +69,7 @@ const Header = ({ page, logout }) => {
                 }
               >
                 <Link to="/mapel" className="nav-link link">
-                  <i className="fa fa-book-open fa-1x"></i> List Mapel
-                </Link>
-              </li>
-
-              <li className={page === "soal" ? "nav-item active" : "nav-item"}>
-                <Link to="/data-soal" className="nav-link link">
-                  <i className="fa fa-brain fa-1x"></i> Soal
+                  <i className="fa fa-book-open fa-1x"></i> Mapel dan Soal
                 </Link>
               </li>
             </>
@@ -87,11 +81,28 @@ const Header = ({ page, logout }) => {
                 }
               >
                 <Link to="/mapel" className="nav-link link">
-                  <i className="fa fa-book-open fa-1x"></i> List Mapel
+                  <i className="fa fa-book-open fa-1x"></i> Mapel dan Soal
+                </Link>
+              </li>
+            </>
+          ) : rule === "guru" ? (
+            <>
+              <li
+                className={
+                  page === "list-mapel" ? "nav-item active" : "nav-item"
+                }
+              >
+                <Link to="/mapel" className="nav-link link">
+                  <i className="fa fa-book-open fa-1x"></i> Mapel dan Soal
                 </Link>
               </li>
             </>
           ) : null}
+          <li className={page === "profile" ? "nav-item active" : "nav-item"}>
+            <Link to="/profile" className="nav-link link">
+              <i className="fa fa-user fa-1x"></i> Profile
+            </Link>
+          </li>
         </ul>
       </div>
       <div className="user mr-0" onClick={() => confirmLogout()}>

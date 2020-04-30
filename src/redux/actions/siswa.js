@@ -24,3 +24,19 @@ export const deleteSiswa = (id) => {
     payload: axios.delete(process.env.REACT_APP_URL + `siswa?id=${id}`),
   };
 };
+
+export const getPageSiswa = (page, key) => {
+  return {
+    type: "PAGE_SISWA",
+    payload: axios.get(
+      process.env.REACT_APP_URL + `siswa?page=${page}&key=${key}`
+    ),
+  };
+};
+
+export const getDetailSiswa = (id) => {
+  return {
+    type: "GET_SISWA",
+    payload: axios.get(process.env.REACT_APP_URL + `siswa/detail?id=${id}`),
+  };
+};
