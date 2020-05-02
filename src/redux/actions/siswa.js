@@ -40,3 +40,13 @@ export const getDetailSiswa = (id) => {
     payload: axios.get(process.env.REACT_APP_URL + `siswa/detail?id=${id}`),
   };
 };
+
+export const editProfileSiswa = (id, data) => {
+  return {
+    type: "EDIT_SISWA",
+    payload: axios.patch(
+      process.env.REACT_APP_URL + `siswa/edit?id=${id}`,
+      data
+    ),
+  };
+};

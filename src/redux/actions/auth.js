@@ -32,3 +32,10 @@ export const getDetailAdmin = (id) => {
     payload: axios.get(process.env.REACT_APP_URL + `admin/detail?id=${id}`),
   };
 };
+
+export const EditProfileAdmin = (id, data) => {
+  return {
+    type: "GET_ADMIN",
+    payload: axios.patch(process.env.REACT_APP_URL + `admin?id=${id}`, data),
+  };
+};

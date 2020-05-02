@@ -12,10 +12,6 @@ const DetailMapel = (props) => {
   const [loading, setLoading] = useState(true);
   const rule = localStorage.getItem("Rule");
 
-  useEffect(() => {
-    document.getElementById("title").innerText = "Matematika";
-  }, []);
-
   const logout = () => {
     localStorage.removeItem("Token");
     localStorage.removeItem("Guru");
@@ -56,6 +52,10 @@ const DetailMapel = (props) => {
     };
     prosesData(parseJwt(localStorage.getItem("Token")));
   }, [dispatch, id_mapel, rule]);
+
+  useEffect(() => {
+    document.getElementById("title").innerText = "Detail Mapel";
+  }, []);
 
   return localStorage.getItem("Token") ? (
     <>

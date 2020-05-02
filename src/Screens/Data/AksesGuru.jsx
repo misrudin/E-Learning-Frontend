@@ -29,6 +29,10 @@ const AksesGuru = (props) => {
     props.history.push("/");
   };
 
+  useEffect(() => {
+    document.getElementById("title").innerText = "Akses Materi Dan Soal";
+  }, []);
+
   return !localStorage.getItem("Token") ? (
     <Redirect to="/auth" />
   ) : localStorage.getItem("Rule") === "guru" ? (

@@ -86,68 +86,92 @@ const Akses = (props) => {
         <h1>admin</h1>
       ) : rule === "guru" ? (
         <>
-          <h5 className="text-secondary mt-4 mb-2">Materi</h5>
           {loading ? (
             <Loading />
           ) : (
             <>
-              <div className="items-akses">
-                {listMapel.map((mapel, i) => {
-                  if (mapel.type === "materi") {
-                    return <RenderItem key={i} data={mapel} index={i + 1} />;
-                  }
-                  return null;
-                })}
+              <div className="card shadow-sm mb-3 border-0">
+                <div className="card-body p-3">
+                  <h5 className="text-secondary mb-2">Materi</h5>
+                  <div className="items-akses">
+                    {listMapel.map((mapel, i) => {
+                      if (mapel.type === "materi") {
+                        return (
+                          <RenderItem key={i} data={mapel} index={i + 1} />
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+                </div>
               </div>
             </>
           )}
 
-          <h5 className="text-secondary mt-4 mb -2">Soal</h5>
           {loading ? (
             <Loading />
           ) : (
             <>
-              <div className="items-akses">
-                {listMapel.map((mapel, i) => {
-                  if (mapel.type === "soal") {
-                    return <RenderItem key={i} data={mapel} index={i + 1} />;
-                  }
-                  return null;
-                })}
+              <div className="card shadow-sm mb-3 border-0">
+                <div className="card-body p-3">
+                  <h5 className="text-secondary mb -2">Soal</h5>
+                  <div className="items-akses">
+                    {listMapel.map((mapel, i) => {
+                      if (mapel.type === "soal") {
+                        return (
+                          <RenderItem key={i} data={mapel} index={i + 1} />
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+                </div>
               </div>
             </>
           )}
         </>
       ) : rule === "siswa" ? (
         <>
-          <h5 className="text-secondary mt-4 mb-2">Materi</h5>
           {loading ? (
             <Loading />
           ) : (
             <>
-              <div className="items-akses">
-                {listMapel.map((mapel, i) => {
-                  if (mapel.type === "materi") {
-                    return <RenderItem key={i} data={mapel} index={i + 1} />;
-                  }
-                  return null;
-                })}
+              <div className="card shadow-sm mb-3 border-0">
+                <div className="card-body p-3">
+                  <h5 className="text-secondary mb-2">Materi</h5>
+                  <div className="items-akses">
+                    {listMapel.map((mapel, i) => {
+                      if (mapel.type === "materi") {
+                        return (
+                          <RenderItem key={i} data={mapel} index={i + 1} />
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+                </div>
               </div>
             </>
           )}
 
-          <h5 className="text-secondary mt-4 mb -2">Soal</h5>
           {loading ? (
             <Loading />
           ) : (
             <>
-              <div className="items-akses">
-                {listMapel.map((mapel, i) => {
-                  if (mapel.type === "soal") {
-                    return <RenderItem key={i} data={mapel} index={i + 1} />;
-                  }
-                  return null;
-                })}
+              <div className="card shadow-sm mb-3 border-0">
+                <div className="card-body p-3">
+                  <h5 className="text-secondary mb -2">Soal</h5>
+                  <div className="items-akses">
+                    {listMapel.map((mapel, i) => {
+                      if (mapel.type === "soal") {
+                        return (
+                          <RenderItem key={i} data={mapel} index={i + 1} />
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+                </div>
               </div>
             </>
           )}

@@ -5,11 +5,7 @@ const Loading = () => {
   return (
     <div className="container-loading">
       <div className="loading-area">
-        <div className="loader cardloading">
-          <div className="inner one" />
-          <div className="inner two" />
-          <div className="inner three" />
-        </div>
+        <div className="loader">Loading...</div>
       </div>
     </div>
   );

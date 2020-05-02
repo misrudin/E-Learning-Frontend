@@ -40,3 +40,13 @@ export const getDetailGuru = (id) => {
     payload: axios.get(process.env.REACT_APP_URL + `guru/detail?id=${id}`),
   };
 };
+
+export const editProfileGuru = (id, data) => {
+  return {
+    type: "EDIT_GURU",
+    payload: axios.patch(
+      process.env.REACT_APP_URL + `guru/edit?id=${id}`,
+      data
+    ),
+  };
+};

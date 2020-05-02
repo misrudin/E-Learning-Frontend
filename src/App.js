@@ -18,7 +18,7 @@ import DetailMapel from "./Screens/Data/DetailMapel";
 import Akses from "./Screens/Data/AksesGuru";
 import TambahMapel from "./Screens/Form/TambahMapel";
 import TambahSoal from "./Screens/Form/TambahSoal";
-import Profile from "./Screens/Form/Profile";
+import Profile from "./Screens/Form/EditProfile";
 
 const App = () => {
   return (

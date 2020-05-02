@@ -98,11 +98,6 @@ const Header = ({ page, logout }) => {
               </li>
             </>
           ) : null}
-          <li className={page === "profile" ? "nav-item active" : "nav-item"}>
-            <Link to="/profile" className="nav-link link">
-              <i className="fa fa-user fa-1x"></i> Profile
-            </Link>
-          </li>
         </ul>
       </div>
       <div className="user mr-0" onClick={() => confirmLogout()}>

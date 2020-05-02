@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import Header from "../../Components/Header";
 import { Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Loading from "../Loading";
-import swal from "sweetalert";
 import { getDetailAdmin } from "../../redux/actions/auth";
 import { getDetailSiswa } from "../../redux/actions/siswa";
 import { getDetailGuru } from "../../redux/actions/guru";
+import avatar from "../../Images/avatar.svg";
+import { Link } from "react-router-dom";
 
 const Profile = (props) => {
   const dispatch = useDispatch();
@@ -63,24 +63,38 @@ const Profile = (props) => {
     getData();
   }, [dispatch, rule]);
 
-  const logout = () => {
-    localStorage.removeItem("Token");
-    localStorage.removeItem("Guru");
-    props.history.push("/");
-  };
-
-  useEffect(() => {
-    document.getElementById("title").innerText =
-      "Profile : " + parseJwt(localStorage.getItem("Token")).nama;
-  }, []);
-
   return !localStorage.getItem("Token") ? (
     <Redirect to="/auth" />
   ) : (
     <>
-      <Header page="profile" logout={logout} />
-      <div className="wrapper">
-        {loading1 ? <Loading /> : <>{<h1>{data.join("=")}</h1>}</>}
+      <div className="card shadow-sm mb-3 border-0">
+        <div className="card-body p-3">
+          {loading1 ? (
+            <Loading />
+          ) : (
+            <>
+              <div className="container-profile">
+                <div className="img-profile">
+                  <img src={avatar} alt="avatar user" width="200px" />
+                </div>
+                <div className="right">
+                  <div className="detail-profile">
+                    <h3 className="mt-3">Nama : {data[0].nama}</h3>
+                    <h3 className="mt-3">Email : {data[0].email}</h3>
+                  </div>
+                  <Link to="/profile" className="link">
+                    <button
+                      type="button"
+                      className="btn btn-danger px-3 buton mt-2"
+                    >
+                      Edit Profile
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </>
   );

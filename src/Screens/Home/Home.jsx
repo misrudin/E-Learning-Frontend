@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import "./style.css";
 import { Alert } from "react-bootstrap";
 import Akses from "../Data/Akses";
+import Profile from "../Form/Profile";
 
 const Home = (props) => {
   const [data, setData] = useState("");
@@ -60,6 +61,7 @@ const Home = (props) => {
         >
           Halo <span>{data.nama}</span>
         </Alert>
+        <Profile />
         <Akses data={data} click={detail} />
       </div>
     </>
