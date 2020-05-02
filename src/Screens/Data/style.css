@@ -4,10 +4,8 @@
 
 .item-mapel {
   width: 100%;
-  padding: 8px 10px;
-  box-sizing: border-box;
-  box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 1px;
+  height: 150px;
+  /* background-color: red; */
 }
 
 .judul {
@@ -22,6 +20,17 @@
 
 .materi {
   background: rgb(95, 50, 7);
+}
+
+.pdf {
+  border: none;
+  width: 100%;
+  height: calc(100vh - 100px);
+}
+
+.wrapper-detail {
+  margin: 70px 0px;
+  padding: 0;
 }
 
 @keyframes gradient {

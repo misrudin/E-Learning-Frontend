@@ -246,6 +246,7 @@ const DataKelas = (props) => {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
+                        <th scope="col">ID</th>
                         <th scope="col">KELAS</th>
                         <th scope="col">ACTION</th>
                       </tr>
@@ -255,6 +256,7 @@ const DataKelas = (props) => {
                         return (
                           <tr key={i}>
                             <td>{i + 1}</td>
+                            <td>{data.id}</td>
                             <td>{data.nama_kelas}</td>
                             <td>
                               <button

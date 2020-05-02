@@ -65,12 +65,30 @@ const DetailMapel = (props) => {
           <Loading />
         ) : (
           <>
-            <h2>{listMapel[0].nama_mapel}</h2>
-            <h2>{listMapel[0].nama_kelas}</h2>
-            <h2>{listMapel[0].nama_guru}</h2>
-            <h2>{listMapel[0].time_create}</h2>
-            <h2>{listMapel[0].type}</h2>
-            <h2>{listMapel[0].file}</h2>
+            <div className="card shadow-sm mb-3 border-0">
+              <div className="card-body p-3">
+                <h2 className="text-uppercase m-0">
+                  {listMapel[0].type} : {listMapel[0].nama_mapel} -{" "}
+                  {listMapel[0].nama_kelas}
+                </h2>
+                <p className="text-capitalize text-secondary m-0">
+                  {" "}
+                  Oleh : {listMapel[0].nama_guru}
+                </p>
+                <p className="text-capitalize text-secondary m-0">
+                  Pada : {listMapel[0].time_create}
+                </p>
+              </div>
+            </div>
+            <div className="card shadow-sm mb-3 border-0">
+              <div className="card-body p-3">
+                <iframe
+                  title="pdf"
+                  src={listMapel[0].file}
+                  className="pdf"
+                ></iframe>
+              </div>
+            </div>
           </>
         )}
       </div>

@@ -84,28 +84,30 @@ const ListMapel = (props) => {
   const RenderItem = ({ index, data }) => {
     return (
       <>
-        <div
-          className={
-            data.type === "soal" ? "item-mapel soal" : "item-mapel materi"
-          }
-          // onClick={() => props.history.push("mapel/detail")}
-        >
-          <div className="judul">
-            <h4 className="mr-1 text-white">{index}.</h4>
-            <h4 className="text-white">
-              {data.nama_mapel} - {data.nama_kelas}
-            </h4>
+        <div className="card shadow-sm mb-3 border-0">
+          <div className="card-body p-3">
+            <div
+              className={data.type === "soal" ? "item-mapel" : "item-mapel"}
+              // onClick={() => props.history.push("mapel/detail")}
+            >
+              <div className="judul">
+                <h4 className="mr-1 text-default">{index}.</h4>
+                <h4 className="text-default">
+                  {data.nama_mapel} - {data.nama_kelas}
+                </h4>
+              </div>
+              <p className="text-default mb-0 oleh">Oleh : {data.nama_guru}</p>
+              <p className="text-default oleh">Pada : {data.time_create}</p>
+              <div className="detail">
+                <p className="text-default">
+                  ({data.type}) : {data.description}
+                </p>
+              </div>
+            </div>
+            <Link to={`mapel/detail/${data.id}`}>
+              <button className="btn btn-primary buton btn-block">Buka</button>
+            </Link>
           </div>
-          <p className="text-white mb-0 oleh">Oleh : {data.nama_guru}</p>
-          <p className="text-white oleh">Pada : {data.time_create}</p>
-          <div className="detail">
-            <p className="text-white">
-              ({data.type}) : {data.description}
-            </p>
-          </div>
-          <Link to={`mapel/detail/${data.id}`}>
-            <button className="btn btn-primary buton m-1 px-5">Buka</button>
-          </Link>
         </div>
       </>
     );

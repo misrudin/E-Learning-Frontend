@@ -202,9 +202,9 @@ const TambahMapel = (props) => {
                   required
                   value={description}
                   onChange={(e) => setDes(e.target.value)}
-                  maxLength={255}
+                  maxLength={100}
                 />
-                <p className="text-warning">{description.length}/255</p>
+                <p className="text-warning">{description.length}/100</p>
               </div>
             </div>
           </form>
