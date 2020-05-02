@@ -17,11 +17,14 @@ const Auth = (props) => {
         <div className="img">
           <img src={bg} alt="background" />
         </div>
-        <div className="login-content">
+        <div className="auth-content login-content">
           <div className="form">
-            <img src={avatar} alt="avatar user" />
-            <h2 className="title">Welcome</h2>
             <div className="auth">
+              <img src={avatar} alt="avatar user" />
+              <h3 className="title">
+                Welcome <br />
+                to e-learning application
+              </h3>
               <div
                 className="login-auth"
                 onClick={() => props.history.push("/admin")}
