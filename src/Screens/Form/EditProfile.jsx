@@ -110,6 +110,7 @@ const EditProfile = (props) => {
         await dispatch(EditProfileAdmin(parseJwt(result.token).id, data)).then(
           () => {
             setLoading1(false);
+            props.history.push("/home");
           }
         );
       }
@@ -131,6 +132,7 @@ const EditProfile = (props) => {
         await dispatch(editProfileGuru(parseJwt(result.token).id, data)).then(
           () => {
             setLoading1(false);
+            props.history.push("/home");
           }
         );
       }
@@ -153,6 +155,7 @@ const EditProfile = (props) => {
         await dispatch(editProfileSiswa(parseJwt(result.token).id, data)).then(
           () => {
             setLoading1(false);
+            props.history.push("/home");
           }
         );
       }
