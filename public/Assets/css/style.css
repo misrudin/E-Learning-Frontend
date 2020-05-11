@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Poppins-SemiBold";
+  /* src: url("../../fonts/Poppins/Poppins-SemiBold.ttf") format("truetype"); */
+  src: url("../fonts/Poppins/Poppins-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url("../fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: url("../fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
+}
+
 .buton {
   background-image: linear-gradient(
     to right,
@@ -25,8 +39,8 @@
   width: 100%;
   height: 50px;
   border-radius: 25px;
-  outline: none;
-  border: none;
+  outline: none !important;
+  border: none !important;
   background-image: linear-gradient(
     to right,
     #858d89,
@@ -41,6 +55,7 @@
   margin: 1rem 0;
   cursor: pointer;
   transition: 0.5s;
+  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.1);
 }
 
 .buton-dgr:hover {
@@ -204,4 +219,49 @@ td.email {
 
 .page-link {
   cursor: pointer !important;
+}
+
+.text-danger {
+  color: salmon !important;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.buton-a {
+  background-image: linear-gradient(
+    to right,
+    #32be8f,
+    #38d39f,
+    #32be8f
+  ) !important;
+  background-size: 200%;
+  border: none !important;
+  -webkit-box-shadow: -1px -1px 4px 1px rgba(255, 255, 255, 0.1) !important;
+  -moz-box-shadow: -1px -1px 4px 1px rgba(255, 255, 255, 0.1) !important;
+  box-shadow: -1px -1px 4px 1px rgba(255, 255, 255, 0.1) !important;
+  transition: 0.5s !important;
+  font-size: 0.9rem !important;
+  padding: 5px 5px !important;
+  margin: 0 5px !important;
+  border-radius: 0 !important;
+}
+
+.buton-a:hover {
+  background-position: right;
+}
+
+td.action {
+  width: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+  .wrapper {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .wrapper {
+    padding: 10px;
+  }
 }

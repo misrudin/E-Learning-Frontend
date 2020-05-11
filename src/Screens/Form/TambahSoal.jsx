@@ -9,6 +9,8 @@ import { addListMapel } from "../../redux/actions/list_mapel";
 import Loading from "../Loading";
 import swal from "sweetalert";
 
+import bg from "../../Images/bg.svg";
+
 const TambahSoal = (props) => {
   const dispatch = useDispatch();
   const [loading1, setLoading1] = useState(true);
@@ -53,7 +55,7 @@ const TambahSoal = (props) => {
 
   const logout = () => {
     localStorage.removeItem("Token");
-    localStorage.removeItem("Guru");
+    localStorage.removeItem("Rule");
     props.history.push("/");
   };
 
@@ -123,108 +125,117 @@ const TambahSoal = (props) => {
       <Header page="list-mapel" logout={logout} />
       <div className="wrapper">
         {loading1 ? <Loading /> : null}
-        <div className="form">
-          <p className="mx-auto text-danger">{msg}</p>
-          <form>
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                Pilih Kelas
-              </label>
-              <div className="col-sm-6">
-                <select
-                  className="custom-select shadow-sm border-0"
-                  name="kelas"
-                  id="kelas"
-                  required
-                  value={id_kelas}
-                  onChange={(e) => setIdKelas(e.target.value)}
+        <>
+          <div className="container-fluid sekolah">
+            <div className="img-sekolah">
+              <img src={bg} alt="background" />
+            </div>
+            <div className="sekolah-content">
+              <div className="form">
+                <h2 className="profile-h2">Tambah Soal</h2>
+                <p className="text-danger">{msg}</p>
+                <div
+                  className={id_kelas ? "input-div one focus" : "input-div one"}
                 >
-                  <option value="">Pilih kelas...</option>
-                  {dataKelas.map((kelas, i) => {
-                    return (
-                      <option key={i} value={kelas.id}>
-                        {kelas.nama_kelas}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            </div>
+                  <div className="i">
+                    <i className="fas fa-user"></i>
+                  </div>
+                  <div className="div">
+                    <h5>Pilih Kelas</h5>
+                    <select
+                      className="input-select"
+                      name="kelas"
+                      id="kelas"
+                      required
+                      value={id_kelas}
+                      onChange={(e) => setIdKelas(e.target.value)}
+                    >
+                      <option value=""></option>
+                      {dataKelas.map((kelas, i) => {
+                        return (
+                          <option key={i} value={kelas.id}>
+                            {kelas.nama_kelas}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                </div>
 
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                Pilih Mapel
-              </label>
-              <div className="col-sm-6">
-                <select
-                  className="custom-select shadow-sm border-0"
-                  name="kelas"
-                  id="kelas"
-                  required
-                  value={id_mapel}
-                  onChange={(e) => setIdMapel(e.target.value)}
+                <div
+                  className={id_mapel ? "input-div one focus" : "input-div one"}
                 >
-                  <option value="">Pilih mapel...</option>
-                  {dataMapel.map((mapel, i) => {
-                    return (
-                      <option key={i} value={mapel.id}>
-                        {mapel.nama_mapel}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            </div>
+                  <div className="i">
+                    <i className="fas fa-user"></i>
+                  </div>
+                  <div className="div">
+                    <h5>Pilih Mapel</h5>
+                    <select
+                      className="input-select"
+                      name="kelas"
+                      id="kelas"
+                      required
+                      value={id_mapel}
+                      onChange={(e) => setIdMapel(e.target.value)}
+                    >
+                      <option value=""></option>
+                      {dataMapel.map((mapel, i) => {
+                        return (
+                          <option key={i} value={mapel.id}>
+                            {mapel.nama_mapel}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                </div>
 
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                PDF File
-              </label>
-              <div className="col-sm-6">
-                <input
-                  id="uploadFile"
-                  type="file"
-                  fileName={file}
-                  onChange={(e) => handleUpload(e)}
-                />
-              </div>
-            </div>
+                <div
+                  className={
+                    description ? "input-div one focus" : "input-div one"
+                  }
+                >
+                  <div className="i">
+                    <i className="fas fa-lock"></i>
+                  </div>
+                  <div className="div">
+                    <h5>Description</h5>
+                    <input
+                      type="text"
+                      className="input-area"
+                      value={description}
+                      onChange={(e) => setDes(e.target.value)}
+                      maxLength={50}
+                    />
+                  </div>
+                </div>
+                <p className="text-danger des">{description.length}/50</p>
 
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                Description
-              </label>
-              <div className="col-sm-6">
-                <textarea
-                  type="text"
-                  className="form-control shadow-sm border-0"
-                  name="mapel"
-                  required
-                  value={description}
-                  onChange={(e) => setDes(e.target.value)}
-                  maxLength={255}
-                />
-                <p className="text-warning">{description.length}/255</p>
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label font-weight-bold">
+                    PDF File
+                  </label>
+                  <div className="col-sm-6">
+                    <input
+                      id="uploadFile"
+                      type="file"
+                      onChange={(e) => handleUpload(e)}
+                    />
+                  </div>
+                </div>
+                <button type="button" className="btn2" onClick={handlePost}>
+                  Simpan
+                </button>
+                <button
+                  className="btn2 btn-danger btn-block buton-dgr"
+                  onClick={() => props.history.push("/mapel")}
+                >
+                  Batal
+                </button>
               </div>
             </div>
-          </form>
-          <div className="col-sm-9 tombol">
-            <button
-              type="button"
-              className="btn btn-secondary font-weight-bold px-3 mr-2 buton-sec"
-              onClick={() => props.history.push("/mapel")}
-            >
-              Batal
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary font-weight-bold px-4 buton"
-              onClick={() => handlePost()}
-            >
-              Simpan
-            </button>
           </div>
-        </div>
+        </>
       </div>
     </>
   ) : (

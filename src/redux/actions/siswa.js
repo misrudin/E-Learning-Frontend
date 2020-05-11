@@ -25,11 +25,11 @@ export const deleteSiswa = (id) => {
   };
 };
 
-export const getPageSiswa = (page, key) => {
+export const getPageSiswa = (page, key, kelas) => {
   return {
     type: "PAGE_SISWA",
     payload: axios.get(
-      process.env.REACT_APP_URL + `siswa?page=${page}&key=${key}`
+      process.env.REACT_APP_URL + `siswa?page=${page}&key=${key}&kelas=${kelas}`
     ),
   };
 };

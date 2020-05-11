@@ -1,0 +1,164 @@
+div.buton-area {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+div.container-tugas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+div.tugas {
+  background-color: #fff;
+  /* height: 170px; */
+  border-radius: 2px;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+
+div.nomor {
+  background-color: rgba(138, 2, 81, 0.9);
+  color: #f7f9fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+}
+p.text-description {
+  max-width: 100%;
+  height: 20px;
+  overflow: hidden;
+}
+
+span.bold {
+  font-weight: bold;
+  color: rgb(61, 60, 60);
+}
+
+div.nomor h3 {
+  font-size: 1.3rem;
+}
+
+div.publish {
+  position: fixed;
+  z-index: 999;
+  padding: 10px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1rem;
+  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.5);
+  right: 5px;
+  bottom: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+div.publish p {
+  display: none;
+  opacity: 0;
+  font-size: 0.8rem;
+  padding: 0;
+  margin: 0;
+}
+div.publish:hover {
+  /* transform: rotate(360deg); */
+  width: 50px;
+  height: 50px;
+  font-size: 0.5rem;
+}
+div.publish:hover p {
+  display: block;
+  opacity: 1;
+  font-size: 0.7rem;
+}
+
+.kanan {
+  position: absolute;
+  right: 20px;
+  margin-bottom: 40px;
+}
+
+div.tugas-body {
+  background-color: #fff;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+div.tugas-title {
+  padding: 10px 15px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(138, 2, 81, 0.2);
+}
+
+div.tugas-title h3 {
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 0;
+}
+
+div.tugas-content p {
+  margin: 0;
+  font-size: 0.9em;
+  padding: 0;
+}
+
+div.tugas-content {
+  padding: 5px 15px;
+}
+
+div.tugas-footer {
+  padding: 10px 10px;
+  display: flex;
+  width: calc(100% - 30px);
+}
+
+@media screen and (max-width: 1050px) {
+  div.container-tugas {
+    grid-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  div.container-tugas {
+    grid-gap: 10px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  div.container-tugas {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  div.tugas-title h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* @media screen and (max-width: 450px) {
+  div.container-tugas {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  div.tugas-title h3 {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  div.tugas {
+    height: 200px;
+  }
+} */

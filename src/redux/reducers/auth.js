@@ -5,6 +5,7 @@ const initialValue = {
   token: null,
   loading: true,
   dataAdmin: [],
+  sekolah: [],
 };
 
 const authReducer = (state = initialValue, action) => {
@@ -101,6 +102,50 @@ const authReducer = (state = initialValue, action) => {
         isPending: false,
         isFulfilled: true,
         dataAdmin: action.payload.data.result,
+      };
+
+    case "SEKOLAH_PENDING":
+      return {
+        ...state,
+        isPending: true,
+        isRejected: false,
+        isFulfilled: false,
+      };
+    case "SEKOLAH_REJECTED":
+      return {
+        ...state,
+        isPending: false,
+        isRejected: true,
+        errMsg: action.payload,
+      };
+    case "SEKOLAH_FULFILLED":
+      return {
+        ...state,
+        isPending: false,
+        isFulfilled: true,
+        sekolah: action.payload.data.result,
+      };
+
+    case "EDIT_SEKOLAH_PENDING":
+      return {
+        ...state,
+        isPending: true,
+        isRejected: false,
+        isFulfilled: false,
+      };
+    case "EDIT_SEKOLAH_REJECTED":
+      return {
+        ...state,
+        isPending: false,
+        isRejected: true,
+        errMsg: action.payload,
+      };
+    case "EDIT_SEKOLAH_FULFILLED":
+      return {
+        ...state,
+        isPending: false,
+        isFulfilled: true,
+        sekolah: action.payload.data.result,
       };
 
     default:

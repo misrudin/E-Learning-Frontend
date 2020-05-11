@@ -25,7 +25,7 @@ const AksesGuru = (props) => {
 
   const logout = () => {
     localStorage.removeItem("Token");
-    localStorage.removeItem("Guru");
+    localStorage.removeItem("Rule");
     props.history.push("/");
   };
 
@@ -91,7 +91,7 @@ const AksesGuru = (props) => {
             <>
               {listAkses.length > 0 ? (
                 <Alert variant="warning" className="mt-3">
-                  Perubahan Data Tidak Terkadi Secara Realtime!. Refresh Halaman
+                  Perubahan Data Tidak Terjadi Secara Realtime!. Refresh Halaman
                   Untuk Melihat Perubaha Data!
                 </Alert>
               ) : (
@@ -102,6 +102,15 @@ const AksesGuru = (props) => {
             </>
           </>
         )}
+        <div className="d-flex justify-content-end mt-4">
+          <button
+            className="btn btn-primary buton"
+            onClick={() => props.history.push("/home")}
+          >
+            <i className="fa fa-reply fa-1x mr-1"></i>
+            Kembali
+          </button>
+        </div>
       </div>
     </>
   ) : (

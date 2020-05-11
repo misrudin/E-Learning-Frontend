@@ -72,6 +72,11 @@ const Header = ({ page, logout }) => {
                   <i className="fa fa-book-open fa-1x"></i> Mapel dan Soal
                 </Link>
               </li>
+              <li className={page === "absen" ? "nav-item active" : "nav-item"}>
+                <Link to="/absen" className="nav-link link">
+                  <i className="fa fa-book-open fa-1x"></i> Absensi
+                </Link>
+              </li>
             </>
           ) : rule === "siswa" ? (
             <>
@@ -84,6 +89,11 @@ const Header = ({ page, logout }) => {
                   <i className="fa fa-book-open fa-1x"></i> Mapel dan Soal
                 </Link>
               </li>
+              <li className={page === "tugas" ? "nav-item active" : "nav-item"}>
+                <Link to="/tugas" className="nav-link link">
+                  <i className="fa fa-book-open fa-1x"></i> Tugas
+                </Link>
+              </li>
             </>
           ) : rule === "guru" ? (
             <>
@@ -94,6 +104,16 @@ const Header = ({ page, logout }) => {
               >
                 <Link to="/mapel" className="nav-link link">
                   <i className="fa fa-book-open fa-1x"></i> Mapel dan Soal
+                </Link>
+              </li>
+              <li className={page === "tugas" ? "nav-item active" : "nav-item"}>
+                <Link to="/tugas" className="nav-link link">
+                  <i className="fa fa-book-open fa-1x"></i> Tugas
+                </Link>
+              </li>
+              <li className={page === "absen" ? "nav-item active" : "nav-item"}>
+                <Link to="/absen" className="nav-link link">
+                  <i className="fa fa-book-open fa-1x"></i> Absensi
                 </Link>
               </li>
             </>

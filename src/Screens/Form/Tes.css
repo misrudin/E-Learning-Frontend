@@ -1,0 +1,201 @@
+div.container-soal {
+  /* background-color: red; */
+  margin-top: 20px;
+}
+
+div.header-soal {
+  display: flex;
+}
+
+div.nomor-soal {
+  background-color: rebeccapurple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.2);
+}
+
+div.nomor-soal h4 {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+div.soal-area {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  /* background-color: red; */
+  width: 100%;
+  /* background-color: rebeccapurple; */
+  /* background-color: #fff; */
+}
+
+div.soal-area p {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+div.abc {
+  /* background-color: red; */
+  margin-left: 50px;
+  margin-top: 10px;
+}
+
+div.abc p {
+  margin: 0;
+  padding: 0;
+}
+
+div.jawab {
+  display: flex;
+  margin: 4px 0px;
+  text-transform: uppercase;
+  width: 100%;
+  /* background-color: red; */
+}
+
+div.jawab p:nth-child(1) {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(143, 83, 14);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #fff; */
+}
+div.jawab p:nth-child(2) {
+  width: 100%;
+  border: 1px solid rgb(201, 193, 182);
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+  padding: 5px;
+  /* background-color: #fff; */
+}
+
+div.jawab p:nth-child(1):hover {
+  background-color: rebeccapurple;
+  color: #fff;
+  font-weight: bold;
+}
+div.no-hover p:nth-child(1):hover {
+  background-color: #f7f9fc;
+  color: #000;
+  font-weight: normal;
+}
+
+div.no-hover p:nth-child(1) {
+  cursor: default;
+}
+
+div.jawab p:nth-child(1).pilih {
+  background-color: rgb(143, 83, 14);
+  color: #fff;
+  font-weight: bold;
+}
+
+textarea.input-text-area {
+  width: 100%;
+  outline: none;
+  /* background-color: rebeccapurple; */
+  padding: 4px 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.2);
+  min-height: 70px;
+}
+
+h3.judul {
+  font-size: 1.2rem;
+  margin-top: 30px;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+div.tes {
+  margin-top: 0 !important;
+  background-image: url(../../Images//pattern//p4.png);
+  min-height: 100vh;
+}
+
+div.hasil {
+  /* margin-top: 0 !important; */
+  background-image: url(../../Images//pattern//p4.png);
+}
+
+div.siswa-container {
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div.siswa-container p {
+  margin: 0;
+  padding: 0;
+}
+
+div.detail-siswa {
+  display: flex;
+}
+
+div.detail-siswa p:nth-child(1) {
+  width: 80px;
+}
+div.detail-siswa p:nth-child(2)::before {
+  content: ": ";
+}
+
+div.detail-container {
+  margin: 0 10px;
+}
+
+h2.timer {
+  font-size: 1rem;
+  border: 1px solid #eee;
+  padding: 4px;
+  border-radius: 2px;
+}
+
+div.header-timer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@media screen and (max-width: 1050px) {
+  div.siswa-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+}
+
+@media screen and (max-width: 900px) {
+  div.siswa-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+  div.header-timer {
+    display: flex;
+    flex-direction: column;
+  }
+  h2.timer {
+    margin-top: 10px;
+  }
+}

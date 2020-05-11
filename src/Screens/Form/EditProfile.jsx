@@ -14,6 +14,8 @@ import { getDetailGuru, editProfileGuru } from "../../redux/actions/guru";
 import { getDetailSiswa, editProfileSiswa } from "../../redux/actions/siswa";
 import Loading from "../Loading";
 
+import bg from "../../Images/bg.svg";
+
 const EditProfile = (props) => {
   const dispatch = useDispatch();
   const [loading1, setLoading1] = useState(true);
@@ -51,7 +53,7 @@ const EditProfile = (props) => {
 
   const logout = () => {
     localStorage.removeItem("Token");
-    localStorage.removeItem("Guru");
+    localStorage.removeItem("Rule");
     props.history.push("/");
   };
 
@@ -163,31 +165,35 @@ const EditProfile = (props) => {
   };
 
   const handlePost = () => {
-    const data = {
-      nama,
-      email,
-      password,
-    };
-    const data2 = {
-      nama,
-      email,
-    };
-    if (password) {
-      if (rule === "admin") {
-        Admin(data);
-      } else if (rule === "guru") {
-        Guru(data);
+    if (repeat) {
+      const data = {
+        nama,
+        email,
+        password,
+      };
+      const data2 = {
+        nama,
+        email,
+      };
+      if (password) {
+        if (rule === "admin") {
+          Admin(data);
+        } else if (rule === "guru") {
+          Guru(data);
+        } else {
+          Siswa(data);
+        }
       } else {
-        Siswa(data);
+        if (rule === "admin") {
+          Admin(data2);
+        } else if (rule === "guru") {
+          Guru(data2);
+        } else {
+          Siswa(data2);
+        }
       }
     } else {
-      if (rule === "admin") {
-        Admin(data2);
-      } else if (rule === "guru") {
-        Guru(data2);
-      } else {
-        Siswa(data2);
-      }
+      setMsg("Konfirmasi Password untuk keamanan!");
     }
   };
 
@@ -197,90 +203,97 @@ const EditProfile = (props) => {
     <>
       <Header page="profile" logout={logout} />
       <div className="wrapper">
-        {loading1 ? (
-          <Loading />
-        ) : (
-          <>
-            <div className="form">
-              <p className="mx-auto text-danger">{msg}</p>
-              <form>
-                <div className="form-group row">
-                  <label className="col-sm-2 col-form-label font-weight-bold">
-                    Nama
-                  </label>
-                  <div className="col-sm-6">
+        {loading1 ? <Loading /> : null}
+        <>
+          <div className="container-fluid sekolah">
+            <div className="img-sekolah">
+              <img src={bg} alt="background" />
+            </div>
+            <div className="sekolah-content">
+              <div className="form">
+                <h2 className="profile-h2">Edit Profile</h2>
+                <p className="profile-p">
+                  *Kosongkan Password jika tidak akan di ubah!
+                </p>
+                <p className="text-danger">{msg}</p>
+                <div className={nama ? "input-div one focus" : "input-div one"}>
+                  <div className="i">
+                    <i className="fas fa-user"></i>
+                  </div>
+                  <div className="div">
+                    <h5>Nama</h5>
                     <input
                       type="text"
-                      className="form-control shadow-sm border-0"
+                      className="input"
                       value={nama}
                       onChange={(e) => setNama(e.target.value)}
                     />
                   </div>
                 </div>
 
-                <div className="form-group row">
-                  <label className="col-sm-2 col-form-label font-weight-bold">
-                    Email
-                  </label>
-                  <div className="col-sm-6">
+                <div
+                  className={email ? "input-div one focus" : "input-div one"}
+                >
+                  <div className="i">
+                    <i className="fas fa-user"></i>
+                  </div>
+                  <div className="div">
+                    <h5>Email</h5>
                     <input
                       type="email"
-                      className="form-control shadow-sm border-0"
+                      className="input"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                 </div>
 
-                <div className="form-group row">
-                  <label className="col-sm-2 col-form-label font-weight-bold">
-                    Password
-                  </label>
-                  <div className="col-sm-6">
+                <div
+                  className={password ? "input-div one focus" : "input-div one"}
+                >
+                  <div className="i">
+                    <i className="fas fa-lock"></i>
+                  </div>
+                  <div className="div">
+                    <h5>Password</h5>
                     <input
                       type="password"
-                      className="form-control shadow-sm border-0"
-                      placeholder="Kosongkan jika tidak mengganti password !"
+                      className="input"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                 </div>
 
-                <div className="form-group row">
-                  <label className="col-sm-2 col-form-label font-weight-bold">
-                    Konfirmasi
-                  </label>
-                  <div className="col-sm-6">
+                <div
+                  className={repeat ? "input-div one focus" : "input-div one"}
+                >
+                  <div className="i">
+                    <i className="fas fa-lock"></i>
+                  </div>
+                  <div className="div">
+                    <h5>Konfirmasi</h5>
                     <input
                       type="password"
-                      className="form-control shadow-sm border-0"
-                      placeholder="Konfirmasi password untuk Edit !"
+                      className="input"
                       value={repeat}
                       onChange={(e) => setRepeat(e.target.value)}
                     />
                   </div>
                 </div>
-              </form>
-              <div className="col-sm-8 tombol">
+                <button type="button" className="btn2" onClick={handlePost}>
+                  Simpan
+                </button>
                 <button
-                  type="button"
-                  className="btn btn-secondary font-weight-bold px-3 mr-2 buton-sec"
+                  className="btn2 btn-danger btn-block buton-dgr"
                   onClick={() => props.history.push("/home")}
                 >
                   Batal
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-primary font-weight-bold px-4 buton"
-                  onClick={handlePost}
-                >
-                  Simpan
-                </button>
               </div>
             </div>
-          </>
-        )}
+          </div>
+        </>
       </div>
     </>
   );

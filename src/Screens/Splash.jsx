@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./Splash.css";
 import { useDispatch } from "react-redux";
 import { saveToken } from "../redux/actions/auth";
+import LoadingImg from "../Images/8.gif";
 
 const Splash = (props) => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Splash = (props) => {
       } else {
         props.history.push("/auth");
       }
-    }, 2000);
+    }, 1500);
   };
 
   useEffect(() => {
@@ -27,11 +28,12 @@ const Splash = (props) => {
 
   return (
     <div className="container-fluid splash">
-      <div className="loader-slash cardloading">
+      {/* <div className="loader-slash cardloading">
         <div className="inner one" />
         <div className="inner two" />
         <div className="inner three" />
-      </div>
+      </div> */}
+      <img src={LoadingImg} alt="Loading" />
     </div>
   );
 };

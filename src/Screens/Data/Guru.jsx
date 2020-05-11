@@ -11,6 +11,7 @@ import {
 } from "../../redux/actions/guru";
 import Loading from "../Loading";
 import swal from "sweetalert";
+import Search from "../Form/Search";
 
 const DataGuru = (props) => {
   const { dataGuru, errMsg } = useSelector((state) => state.guru);
@@ -62,22 +63,13 @@ const DataGuru = (props) => {
     });
   };
 
-  const getKey = async (e) => {
-    if (e) {
-      if (e.key === "Enter") {
-        setPage(1);
-        setLoading2(true);
-        await dispatch(getPageGuru(1, key)).then(() => {
-          setLoading2(false);
-        });
-      }
-    } else {
-      setPage(1);
-      setLoading2(true);
-      await dispatch(getPageGuru(1, "")).then(() => {
-        setLoading2(false);
-      });
-    }
+  const SearchData = async (q) => {
+    setKey(q);
+    setPage(1);
+    setLoading2(true);
+    await dispatch(getPageGuru(1, q)).then(() => {
+      setLoading2(false);
+    });
   };
 
   const handleClose = () => {
@@ -135,7 +127,8 @@ const DataGuru = (props) => {
       await dispatch(addGuru(data)).then((res) => {
         setLoading2(false);
         const result = res.value.data.result;
-        if (result) {
+        // eslint-disable-next-line
+        if (result.status == 1) {
           getData();
           swal("Berhasil!", "Data Guru Ditambahkan", "success");
           handleClose();
@@ -230,7 +223,7 @@ const DataGuru = (props) => {
 
   const logout = () => {
     localStorage.removeItem("Token");
-    localStorage.removeItem("Guru");
+    localStorage.removeItem("Rule");
     props.history.push("/");
   };
 
@@ -246,37 +239,27 @@ const DataGuru = (props) => {
         ) : (
           <>
             <div className="head">
-              <button
-                className="btn btn-primary px-4 buton"
-                onClick={() => {
-                  setModal("tambah");
-                  setShow(true);
-                }}
-              >
-                Tambah Data Guru
-              </button>
+              <div className="flex">
+                <button
+                  className="btn btn-primary px-3 buton m-1"
+                  onClick={() => {
+                    setModal("tambah");
+                    setShow(true);
+                  }}
+                >
+                  <i className="fa fa-plus fa-1x"></i> Tambah
+                </button>
+                <button
+                  className="btn btn-primary px-4 buton m-1"
+                  onClick={() => {
+                    props.history.push("/ig");
+                  }}
+                >
+                  <i className="fa fa-download fa-1x"></i> Import
+                </button>
+              </div>
               <div className="cari">
-                <input
-                  type="text"
-                  className="form-control shadow-sm cariinput border-0"
-                  name="search"
-                  required
-                  value={key}
-                  placeholder="Enter Untuk Cari ..."
-                  onChange={(e) => setKey(e.target.value)}
-                  onKeyPress={getKey}
-                />
-                {key.length > 0 ? (
-                  <p
-                    className="bersih"
-                    onClick={() => {
-                      setKey("");
-                      getKey();
-                    }}
-                  >
-                    x
-                  </p>
-                ) : null}
+                <Search search={(q) => SearchData(q)} />
               </div>
             </div>
 
@@ -387,57 +370,61 @@ const DataGuru = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="msg text-danger">{msg}</p>
-          <form>
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                NIP
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="text"
-                  className="form-control shadow-sm border-0"
-                  name="nip"
-                  required
-                  value={nip}
-                  onChange={(e) => setNip(e.target.value)}
-                  autoFocus
-                />
+          <div className="sekolah-content">
+            <div className="form-input">
+              <p className="text-danger">{msg}</p>
+              <div className={nip ? "input-div one focus" : "input-div one"}>
+                <div className="i">
+                  <i className="fas fa-user"></i>
+                </div>
+                <div className="div">
+                  <h5>NIP</h5>
+                  <input
+                    type="text"
+                    className="input"
+                    name="nip"
+                    value={nip}
+                    onChange={(e) => setNip(e.target.value)}
+                    autoFocus
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                Nama
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="text"
-                  className="form-control shadow-sm border-0"
-                  name="name"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+              <div className={name ? "input-div one focus" : "input-div one"}>
+                <div className="i">
+                  <i className="fas fa-user"></i>
+                </div>
+                <div className="div">
+                  <h5>Nama</h5>
+                  <input
+                    type="text"
+                    className="input"
+                    name="name"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                Email
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="email"
-                  className="form-control shadow-sm border-0"
-                  name="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+              <div className={email ? "input-div one focus" : "input-div one"}>
+                <div className="i">
+                  <i className="fas fa-user"></i>
+                </div>
+                <div className="div">
+                  <h5>Email</h5>
+                  <input
+                    type="email"
+                    className="input"
+                    name="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
-          </form>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <button

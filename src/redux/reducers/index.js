@@ -6,6 +6,10 @@ import siswaReducer from "./siswa";
 import kelasReducer from "./kelas";
 import mapelReducer from "./mapel";
 import listMapelReducer from "./list_mapel";
+import adminReducer from "./admin";
+import excelReducer from "./excel";
+import absenReducer from "./absen";
+import tugasReducer from "./tugas";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -15,6 +19,10 @@ const reducers = combineReducers({
   kelas: kelasReducer,
   mapel: mapelReducer,
   listmapel: listMapelReducer,
+  admin: adminReducer,
+  excel: excelReducer,
+  absen: absenReducer,
+  tugas: tugasReducer,
 });
 
 export default reducers;

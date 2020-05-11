@@ -39,3 +39,16 @@ export const EditProfileAdmin = (id, data) => {
     payload: axios.patch(process.env.REACT_APP_URL + `admin?id=${id}`, data),
   };
 };
+
+export const getSekolah = () => {
+  return {
+    type: "SEKOLAH",
+    payload: axios.get(process.env.REACT_APP_URL + "sekolah"),
+  };
+};
+export const editSekolah = (id, data) => {
+  return {
+    type: "EDIT_SEKOLAH",
+    payload: axios.patch(process.env.REACT_APP_URL + `sekolah?id=${id}`, data),
+  };
+};

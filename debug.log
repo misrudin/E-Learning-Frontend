@@ -1,0 +1,4 @@
+[0504/065949.512:ERROR:http_transport_win.cc(276)] WinHttpSendRequest: The operation completed successfully. (0x0)
+[0504/080927.941:ERROR:http_transport_win.cc(276)] WinHttpSendRequest: The operation completed successfully. (0x0)
+[0504/141928.581:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[0509/113009.306:ERROR:settings.cc(320)] Settings magic is not 1129342067

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../Components/Header";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import "./style.css";
 import { Modal } from "react-bootstrap";
 import {
   getPageSiswa,
@@ -12,6 +13,7 @@ import {
 import { getKelas } from "../../redux/actions/kelas";
 import Loading from "../Loading";
 import swal from "sweetalert";
+import Search from "../Form/Search";
 
 const DataSiswa = (props) => {
   const { dataSiswa, errMsg } = useSelector((state) => state.siswa);
@@ -30,6 +32,7 @@ const DataSiswa = (props) => {
   const [dataKelas, setDataKelas] = useState([]);
   const [page, setPage] = useState(1);
   const [key, setKey] = useState("");
+  const [key2, setKey2] = useState("");
 
   const clear = () => {
     setNis("");
@@ -44,7 +47,7 @@ const DataSiswa = (props) => {
     setPage(newPage);
 
     setLoading2(true);
-    await dispatch(getPageSiswa(newPage, key)).then(() => {
+    await dispatch(getPageSiswa(newPage, key, key2)).then(() => {
       setLoading2(false);
     });
   };
@@ -53,7 +56,7 @@ const DataSiswa = (props) => {
     setPage(newPage);
 
     setLoading2(true);
-    await dispatch(getPageSiswa(newPage, key)).then(() => {
+    await dispatch(getPageSiswa(newPage, key, key2)).then(() => {
       setLoading2(false);
     });
   };
@@ -61,27 +64,27 @@ const DataSiswa = (props) => {
     setPage(newPage);
 
     setLoading2(true);
-    await dispatch(getPageSiswa(newPage, key)).then(() => {
+    await dispatch(getPageSiswa(newPage, key, key2)).then(() => {
       setLoading2(false);
     });
   };
 
-  const getKey = async (e) => {
-    if (e) {
-      if (e.key === "Enter") {
-        setPage(1);
-        setLoading2(true);
-        await dispatch(getPageSiswa(1, key)).then(() => {
-          setLoading2(false);
-        });
-      }
-    } else {
-      setPage(1);
-      setLoading2(true);
-      await dispatch(getPageSiswa(1, "")).then(() => {
-        setLoading2(false);
-      });
-    }
+  const SearchData = async (q) => {
+    setKey(q);
+    setPage(1);
+    setLoading2(true);
+    await dispatch(getPageSiswa(1, q, key2)).then(() => {
+      setLoading2(false);
+    });
+  };
+
+  const filterKelas = async (e) => {
+    setKey2(e);
+    setPage(1);
+    setLoading2(true);
+    await dispatch(getPageSiswa(1, key, e)).then(() => {
+      setLoading2(false);
+    });
   };
 
   const handleClose = () => {
@@ -108,12 +111,12 @@ const DataSiswa = (props) => {
   };
 
   useEffect(() => {
-    document.getElementById("title").innerText = "Data Guru";
+    document.getElementById("title").innerText = "Data Siswa";
   }, []);
 
   const getData = async () => {
     setLoading2(true);
-    await dispatch(getPageSiswa(page, key)).then(() => {
+    await dispatch(getPageSiswa(page, key, key2)).then(() => {
       setLoading2(false);
     });
   };
@@ -140,12 +143,13 @@ const DataSiswa = (props) => {
       await dispatch(addSiswa(data)).then((res) => {
         setLoading2(false);
         const result = res.value.data.result;
-        if (result) {
+        // eslint-disable-next-line
+        if (result.status == 1) {
           getData();
           swal("Berhasil!", "Data Siswa Ditambahkan", "success");
           handleClose();
         } else {
-          setMsg(res.value.data);
+          setMsg("Nis sudah terdaftar!");
           setShow(true);
         }
       });
@@ -237,7 +241,7 @@ const DataSiswa = (props) => {
     getDataKelas();
     const getData2 = async () => {
       setLoading1(true);
-      await dispatch(getPageSiswa(1, "")).then(() => {
+      await dispatch(getPageSiswa(1, "", "")).then(() => {
         setLoading1(false);
       });
     };
@@ -247,7 +251,7 @@ const DataSiswa = (props) => {
 
   const logout = () => {
     localStorage.removeItem("Token");
-    localStorage.removeItem("Guru");
+    localStorage.removeItem("Rule");
     props.history.push("/");
   };
 
@@ -263,37 +267,45 @@ const DataSiswa = (props) => {
         ) : (
           <>
             <div className="head">
-              <button
-                className="btn btn-primary px-4 buton"
-                onClick={() => {
-                  setModal("tambah");
-                  setShow(true);
-                }}
-              >
-                Tambah Data Siswa
-              </button>
-              <div className="cari">
-                <input
-                  type="text"
-                  className="form-control shadow-sm cariinput border-0"
-                  name="search"
-                  required
-                  value={key}
-                  placeholder="Enter Untuk Cari ..."
-                  onChange={(e) => setKey(e.target.value)}
-                  onKeyPress={getKey}
-                />
-                {key.length > 0 ? (
-                  <p
-                    className="bersih"
-                    onClick={() => {
-                      setKey("");
-                      getKey();
-                    }}
+              <div className="flex">
+                <button
+                  className="btn btn-primary px-3 buton m-1"
+                  onClick={() => {
+                    setModal("tambah");
+                    setShow(true);
+                  }}
+                >
+                  <i className="fa fa-plus fa-1x"></i> Tambah
+                </button>
+                <button
+                  className="btn btn-primary px-4 buton m-1"
+                  onClick={() => {
+                    props.history.push("/is");
+                  }}
+                >
+                  <i className="fa fa-download fa-1x"></i> Import
+                </button>
+              </div>
+              <div className="cari cari-siswa">
+                <div className="col-sm-6">
+                  <select
+                    className="custom-select shadow-sm border-0"
+                    name="kelas"
+                    value={key2}
+                    onChange={(e) => filterKelas(e.target.value)}
                   >
-                    x
-                  </p>
-                ) : null}
+                    <option value="">Tampilkan Semua</option>
+                    {dataKelas.map((kelas, i) => {
+                      return (
+                        <option key={i} value={kelas.id}>
+                          {kelas.nama_kelas}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+
+                <Search search={(q) => SearchData(q)} />
               </div>
             </div>
 
@@ -307,41 +319,45 @@ const DataSiswa = (props) => {
                         <th scope="col">NIS</th>
                         <th scope="col">NAMA</th>
                         <th scope="col">EMAIL</th>
+                        <th scope="col">KELAS</th>
                         <th scope="col">ACTION</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {dataSiswa[2].map((data, i) => {
-                        return (
-                          <tr key={i}>
-                            <td>{i + 1}</td>
-                            <td>{data.nis}</td>
-                            <td>{data.nama}</td>
-                            <td className="email">{data.email}</td>
-                            <td>
-                              <button
-                                type="button"
-                                className="btn border-0"
-                                onClick={() => handleDelete(data.id)}
-                              >
-                                <i className="fa fa-trash btn-trash"></i>
-                              </button>
-                              <button
-                                type="button"
-                                className="btn border-0"
-                                data-toggle="modal"
-                                onClick={() => {
-                                  handleinputEdit(data);
-                                  setModal("edit");
-                                }}
-                                data-target="#modalInput"
-                              >
-                                <i className="fa fa-edit btn-edit"></i>
-                              </button>
-                            </td>
-                          </tr>
-                        );
-                      })}
+                      {!dataSiswa
+                        ? console.log("Error 201!, try again")
+                        : dataSiswa[2].map((data, i) => {
+                            return (
+                              <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td>{data.nis}</td>
+                                <td>{data.nama}</td>
+                                <td className="email">{data.email}</td>
+                                <td>{data.nama_kelas}</td>
+                                <td>
+                                  <button
+                                    type="button"
+                                    className="btn border-0"
+                                    onClick={() => handleDelete(data.id)}
+                                  >
+                                    <i className="fa fa-trash btn-trash"></i>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="btn border-0"
+                                    data-toggle="modal"
+                                    onClick={() => {
+                                      handleinputEdit(data);
+                                      setModal("edit");
+                                    }}
+                                    data-target="#modalInput"
+                                  >
+                                    <i className="fa fa-edit btn-edit"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            );
+                          })}
                     </tbody>
                   </table>
                 </div>
@@ -349,7 +365,9 @@ const DataSiswa = (props) => {
             </div>
 
             <div className="col-md-12 my-3">
-              {dataSiswa[0] === 1 ? null : (
+              {!dataSiswa ? (
+                console.log("Error 201!, try again")
+              ) : dataSiswa[0] === 1 ? null : (
                 <nav>
                   <ul className="pagination  justify-content-center">
                     {page <= 1 ? null : (
@@ -405,82 +423,89 @@ const DataSiswa = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="msg text-danger">{msg}</p>
-          <form>
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                NIS
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="text"
-                  className="form-control shadow-sm border-0"
-                  name="nis"
-                  required
-                  value={nis}
-                  onChange={(e) => setNis(e.target.value)}
-                  autoFocus
-                />
+          <div className="sekolah-content">
+            <div className="form-input">
+              <p className="text-danger">{msg}</p>
+              <div className={nis ? "input-div one focus" : "input-div one"}>
+                <div className="i">
+                  <i className="fas fa-user"></i>
+                </div>
+                <div className="div">
+                  <h5>NIS</h5>
+                  <input
+                    type="text"
+                    className="input"
+                    name="nip"
+                    value={nis}
+                    onChange={(e) => setNis(e.target.value)}
+                    autoFocus
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                Nama
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="text"
-                  className="form-control shadow-sm border-0"
-                  name="name"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+              <div className={name ? "input-div one focus" : "input-div one"}>
+                <div className="i">
+                  <i className="fas fa-user"></i>
+                </div>
+                <div className="div">
+                  <h5>Nama</h5>
+                  <input
+                    type="text"
+                    className="input"
+                    name="name"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                Kelas
-              </label>
-              <div className="col-sm-9">
-                <select
-                  className="custom-select shadow-sm border-0"
-                  name="kelas"
-                  id="kelas"
-                  required
-                  value={id_kelas}
-                  onChange={(e) => setKelas(e.target.value)}
-                >
-                  <option value="">Choose...</option>
-                  {dataKelas.map((kelas, i) => {
-                    return (
-                      <option key={i} value={kelas.id}>
-                        {kelas.nama_kelas}
-                      </option>
-                    );
-                  })}
-                </select>
+              <div
+                className={id_kelas ? "input-div one focus" : "input-div one"}
+              >
+                <div className="i">
+                  <i className="fas fa-user"></i>
+                </div>
+                <div className="div">
+                  <h5>Pilih Kelas</h5>
+                  <select
+                    className="input-select"
+                    name="kelas"
+                    id="kelas"
+                    required
+                    value={id_kelas}
+                    onChange={(e) => setKelas(e.target.value)}
+                  >
+                    <option value=""></option>
+                    {dataKelas.map((kelas, i) => {
+                      return (
+                        <option key={i} value={kelas.id}>
+                          {kelas.nama_kelas}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
               </div>
-            </div>
 
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                Email
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="email"
-                  className="form-control shadow-sm border-0"
-                  name="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+              <div className={email ? "input-div one focus" : "input-div one"}>
+                <div className="i">
+                  <i className="fas fa-user"></i>
+                </div>
+                <div className="div">
+                  <h5>Email</h5>
+                  <input
+                    type="email"
+                    className="input"
+                    name="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
-          </form>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <button

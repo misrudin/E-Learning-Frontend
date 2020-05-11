@@ -11,6 +11,7 @@ import {
 import Header from "../../Components/Header";
 import Loading from "../Loading";
 import swal from "sweetalert";
+import Search from "../Form/Search";
 
 const DataKelas = (props) => {
   const { dataKelas, errMsg } = useSelector((state) => state.kelas);
@@ -59,22 +60,13 @@ const DataKelas = (props) => {
     });
   };
 
-  const getKey = async (e) => {
-    if (e) {
-      if (e.key === "Enter") {
-        setPage(1);
-        setLoading2(true);
-        await dispatch(getPageKelas(1, key)).then(() => {
-          setLoading2(false);
-        });
-      }
-    } else {
-      setPage(1);
-      setLoading2(true);
-      await dispatch(getPageKelas(1, "")).then(() => {
-        setLoading2(false);
-      });
-    }
+  const SearchData = async (q) => {
+    setKey(q);
+    setPage(1);
+    setLoading2(true);
+    await dispatch(getPageKelas(1, q)).then(() => {
+      setLoading2(false);
+    });
   };
 
   const handleClose = () => {
@@ -83,7 +75,7 @@ const DataKelas = (props) => {
   };
 
   useEffect(() => {
-    document.getElementById("title").innerText = "Data Guru";
+    document.getElementById("title").innerText = "Data Kelas";
   }, []);
 
   const getData = async () => {
@@ -189,7 +181,7 @@ const DataKelas = (props) => {
 
   const logout = () => {
     localStorage.removeItem("Token");
-    localStorage.removeItem("Guru");
+    localStorage.removeItem("Rule");
     props.history.push("/");
   };
 
@@ -205,37 +197,19 @@ const DataKelas = (props) => {
         ) : (
           <>
             <div className="head">
-              <button
-                className="btn btn-primary px-4 buton"
-                onClick={() => {
-                  setModal("tambah");
-                  setShow(true);
-                }}
-              >
-                Tambah Data Kelas
-              </button>
+              <div className="flex">
+                <button
+                  className="btn btn-primary px-3 buton m-1"
+                  onClick={() => {
+                    setModal("tambah");
+                    setShow(true);
+                  }}
+                >
+                  <i className="fa fa-plus fa-1x"></i> Tambah
+                </button>
+              </div>
               <div className="cari">
-                <input
-                  type="text"
-                  className="form-control shadow-sm cariinput border-0"
-                  name="search"
-                  required
-                  value={key}
-                  placeholder="Enter Untuk Cari ..."
-                  onChange={(e) => setKey(e.target.value)}
-                  onKeyPress={getKey}
-                />
-                {key.length > 0 ? (
-                  <p
-                    className="bersih"
-                    onClick={() => {
-                      setKey("");
-                      getKey();
-                    }}
-                  >
-                    x
-                  </p>
-                ) : null}
+                <Search search={(q) => SearchData(q)} />
               </div>
             </div>
 
@@ -345,25 +319,28 @@ const DataKelas = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="msg text-danger">{msg}</p>
-          <form>
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label font-weight-bold">
-                Kelas
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="text"
-                  className="form-control shadow-sm border-0"
-                  name="kelas"
-                  required
-                  value={kelas}
-                  onChange={(e) => setKelas(e.target.value)}
-                  autoFocus
-                />
+          <div className="sekolah-content">
+            <div className="form-input">
+              <p className="text-danger">{msg}</p>
+
+              <div className={kelas ? "input-div one focus" : "input-div one"}>
+                <div className="i">
+                  <i className="fas fa-user"></i>
+                </div>
+                <div className="div">
+                  <h5>Nama Kelas</h5>
+                  <input
+                    type="text"
+                    className="input"
+                    name="kelas"
+                    required
+                    value={kelas}
+                    onChange={(e) => setKelas(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
-          </form>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <button

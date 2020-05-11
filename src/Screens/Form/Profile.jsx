@@ -67,7 +67,7 @@ const Profile = (props) => {
     <Redirect to="/auth" />
   ) : (
     <>
-      <div className="card shadow-sm mb-3 border-0">
+      <div className="card shadow-sm mb-3 border-0 minimal">
         <div className="card-body p-3">
           {loading1 ? (
             <Loading />
@@ -79,17 +79,25 @@ const Profile = (props) => {
                 </div>
                 <div className="right">
                   <div className="detail-profile">
-                    <h3 className="mt-3">Nama : {data[0].nama}</h3>
-                    <h3 className="mt-3">Email : {data[0].email}</h3>
+                    <div className="profile-area d-flex">
+                      <p className="mt-3">Nama</p>
+                      <p className="mt-3">{data[0].nama}</p>
+                    </div>
+                    <div className="profile-area d-flex">
+                      <p className="mt-3">Email</p>
+                      <p className="mt-3">{data[0].email}</p>
+                    </div>
                   </div>
-                  <Link to="/profile" className="link">
-                    <button
-                      type="button"
-                      className="btn btn-danger px-3 buton mt-2"
-                    >
-                      Edit Profile
-                    </button>
-                  </Link>
+                  <div className="d-flex btn-profile">
+                    <Link to="/profile" className="link">
+                      <button
+                        type="button"
+                        className="btn btn-danger px-3 buton mt-2 mx-auto"
+                      >
+                        <i className="fa fa-edit fa-1x"></i> Edit
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </>

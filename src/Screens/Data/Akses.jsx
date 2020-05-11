@@ -61,49 +61,67 @@ const Akses = (props) => {
     getData();
   }, [dispatch, rule]);
 
-  const RenderItem = ({ data, index }) => {
-    // data.time_create === tanggal ? console.log("sama") : console.log("beda");
+  const RenderItem = ({ index, data }) => {
     return (
-      <Link
-        to={rule === "guru" ? `akses/${data.id}` : `mapel/detail/${data.id}`}
-        className="link"
-      >
-        <div className="item-akses">
-          <div className="judul-akses text-primary">
-            <h6>
-              {data.nama_mapel} {data.nama_kelas}
-            </h6>
-            <h6>Dibuat Pada : {data.time_create}</h6>
+      <div className="tugas">
+        <div className="nomor">{/* <h3>{index}</h3> */}</div>
+        <div className="tugas-body">
+          <div className="tugas-title text-uppercase">
+            <h3>
+              {" "}
+              {data.nama_mapel} - {data.nama_kelas}
+            </h3>
+          </div>
+          <div className="tugas-content">
+            <p className="text-capitalize">Guru : {data.nama_guru}</p>
+            <p>Waktu : {data.time_create}</p>
+            <p className="text-description text-capitalize">
+              {data.description}
+            </p>
+          </div>
+          <div className="tugas-footer">
+            <button className="btn btn-primary buton-a">
+              <i className="fa fa-edit fa-1x mr-1"></i>
+              Edit
+            </button>
+            <button className="btn btn-primary buton-a">
+              <i className="fa fa-trash fa-1x mr-1"></i>
+              Hapus
+            </button>
+            <Link className="link" to={`mapel/detail/${data.id}`}>
+              <button className="btn btn-primary buton-a">
+                <i className="fa fa-hourglass-start fa-1x mr-1"></i>
+                Mulai Belajar
+              </button>
+            </Link>
+            <Link className="link" to={`akses/${data.id}`}>
+              <button className="btn btn-primary buton-a">
+                <i className="fa fa-history fa-1x mr-1"></i>
+                Lihat Hasil
+              </button>
+            </Link>
           </div>
         </div>
-      </Link>
+      </div>
     );
   };
 
   return (
     <>
-      {rule === "admin" ? (
-        <h1>admin</h1>
-      ) : rule === "guru" ? (
+      {rule === "guru" ? (
         <>
           {loading ? (
             <Loading />
           ) : (
             <>
-              <div className="card shadow-sm mb-3 border-0">
-                <div className="card-body p-3">
-                  <h5 className="text-secondary mb-2">Materi</h5>
-                  <div className="items-akses">
-                    {listMapel.map((mapel, i) => {
-                      if (mapel.type === "materi") {
-                        return (
-                          <RenderItem key={i} data={mapel} index={i + 1} />
-                        );
-                      }
-                      return null;
-                    })}
-                  </div>
-                </div>
+              <h5 className="text-secondary my-4 judul">Materi</h5>
+              <div className="container-tugas">
+                {listMapel.map((mapel, i) => {
+                  if (mapel.type === "materi") {
+                    return <RenderItem key={i} data={mapel} index={i + 1} />;
+                  }
+                  return null;
+                })}
               </div>
             </>
           )}
@@ -112,20 +130,14 @@ const Akses = (props) => {
             <Loading />
           ) : (
             <>
-              <div className="card shadow-sm mb-3 border-0">
-                <div className="card-body p-3">
-                  <h5 className="text-secondary mb -2">Soal</h5>
-                  <div className="items-akses">
-                    {listMapel.map((mapel, i) => {
-                      if (mapel.type === "soal") {
-                        return (
-                          <RenderItem key={i} data={mapel} index={i + 1} />
-                        );
-                      }
-                      return null;
-                    })}
-                  </div>
-                </div>
+              <h5 className="text-secondary my-4 judul">Soal</h5>
+              <div className="container-tugas">
+                {listMapel.map((mapel, i) => {
+                  if (mapel.type === "soal") {
+                    return <RenderItem key={i} data={mapel} index={i + 1} />;
+                  }
+                  return null;
+                })}
               </div>
             </>
           )}
@@ -136,20 +148,14 @@ const Akses = (props) => {
             <Loading />
           ) : (
             <>
-              <div className="card shadow-sm mb-3 border-0">
-                <div className="card-body p-3">
-                  <h5 className="text-secondary mb-2">Materi</h5>
-                  <div className="items-akses">
-                    {listMapel.map((mapel, i) => {
-                      if (mapel.type === "materi") {
-                        return (
-                          <RenderItem key={i} data={mapel} index={i + 1} />
-                        );
-                      }
-                      return null;
-                    })}
-                  </div>
-                </div>
+              <h5 className="text-secondary my-4 judul">Materi</h5>
+              <div className="container-tugas">
+                {listMapel.map((mapel, i) => {
+                  if (mapel.type === "materi") {
+                    return <RenderItem key={i} data={mapel} index={i + 1} />;
+                  }
+                  return null;
+                })}
               </div>
             </>
           )}
@@ -158,20 +164,14 @@ const Akses = (props) => {
             <Loading />
           ) : (
             <>
-              <div className="card shadow-sm mb-3 border-0">
-                <div className="card-body p-3">
-                  <h5 className="text-secondary mb -2">Soal</h5>
-                  <div className="items-akses">
-                    {listMapel.map((mapel, i) => {
-                      if (mapel.type === "soal") {
-                        return (
-                          <RenderItem key={i} data={mapel} index={i + 1} />
-                        );
-                      }
-                      return null;
-                    })}
-                  </div>
-                </div>
+              <h5 className="text-secondary my-4 judul">Soal</h5>
+              <div className="container-tugas">
+                {listMapel.map((mapel, i) => {
+                  if (mapel.type === "soal") {
+                    return <RenderItem key={i} data={mapel} index={i + 1} />;
+                  }
+                  return null;
+                })}
               </div>
             </>
           )}

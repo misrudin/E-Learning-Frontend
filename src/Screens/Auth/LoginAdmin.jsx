@@ -7,6 +7,7 @@ import Loading from "../Loading";
 import wave from "../../Images/wave.png";
 import bg from "../../Images/bg.svg";
 import avatar from "../../Images/avatar.svg";
+import wave2 from "../../Images/footer-bg.png";
 
 const LoginAdmin = (props) => {
   const dispatch = useDispatch();
@@ -74,6 +75,7 @@ const LoginAdmin = (props) => {
   return !localStorage.getItem("Token") ? (
     <>
       {loading ? <Loading /> : null}
+      <img className="wave" src={wave2} alt="wave" />
       <img className="wave" src={wave} alt="wave" />
       <div className="container-fluid">
         <div className="img">
